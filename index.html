@@ -646,12 +646,11 @@ const takeFlowSlide = predicate => {
   slide => slide.html.includes('채용 공고 기준을 이력서에 연결했더니'),
   slide => slide.html.includes('복습 · 0–5분'),
   slide => slide.html.includes('Agent를 만듭니다'),
-  slide => slide.html.includes('개념 · AGENT VS 챗봇'),
+  slide => slide.html.includes('A. 아닙니다. Skill만 활용해도 됩니다.'),
+  slide => slide.html.includes('개념 · AGENT VS 챗봇') || slide.html.includes('개념 · Agent vs 챗봇'),
   slide => slide.html.includes('Agent로 만들어야 하는 기준'),
   slide => slide.html.includes('Agent는 어떻게 만드나요?'),
-  slide => slide.html.includes('개념 · AGENT VS 챗봇'),
   slide => slide.html.includes('Agent는 네 단계를 순서대로 실행합니다'),
-  slide => slide.html.includes('A. 아닙니다. Skill만 활용해도 됩니다.'),
   slide => slide.html.includes('순차 · 병렬 · 분기 · 반복'),
   slide => slide.html.includes('취업 준비 Agent 하나에 Skill을 연결합니다'),
   slide => slide.html.includes('일하는 순서를 다섯 칸으로'),
@@ -671,6 +670,42 @@ const takeFlowSlide = predicate => {
   slide => slide.html.includes('발표는 이 흐름으로 진행합니다')
 ].forEach(takeFlowSlide);
 SLIDES.splice(0, SLIDES.length, ...flowOrderedSlides, ...SLIDES.filter((slide, i) => !flowUsed.has(i)));
+const skillRangeSlide = SLIDES.find(slide => slide.html.includes('A. 아닙니다. Skill만 활용해도 됩니다.'));
+if (skillRangeSlide) {
+  skillRangeSlide.html = skillRangeSlide.html
+    .replace('margin-top:22px;padding:20px 22px;', 'margin-top:16px;padding:14px 18px;')
+    .replaceAll('min-height:150px;', 'min-height:96px;')
+    .replaceAll('font-size:24px;', 'font-size:21px;');
+}
+const agentBumperForInsert = SLIDES.find(slide => slide.html.includes('Agent를 만듭니다'));
+const multiBumperForNumber = SLIDES.find(slide => slide.html.includes('Multi Agent를 만듭니다'));
+if (agentBumperForInsert) {
+  agentBumperForInsert.html = agentBumperForInsert.html.replace('>03</div>', '>02</div>');
+  const agentBumperIndex = SLIDES.indexOf(agentBumperForInsert);
+  SLIDES.splice(agentBumperIndex + 1, 0, {
+    notes:"Agent와 Skill의 차이를 바로 비교합니다. Skill은 반복 규칙이고 Agent는 그 규칙을 읽고 실행해 결과를 만드는 담당자입니다.",
+    html:`<div class="inner" style="max-width:1120px;">
+      <div class="kicker">개념 · SKILL VS AGENT</div>
+      <div class="h2" style="font-size:25px;">SKILL.md는 일하는 방법, Agent는 일을 맡는 담당자입니다.</div>
+      <div class="sub">반복되는 규칙을 적는 것과, 그 규칙을 읽고 파일까지 만드는 것은 다릅니다.</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px;">
+        <div class="demo" style="padding:22px 24px;border-color:rgba(52,211,153,.42);min-height:250px;">
+          <div class="ctag gr">SKILL.md</div>
+          <div class="ct" style="font-size:24px;margin-top:10px;">반복할 규칙을 적습니다</div>
+          <div class="cb" style="margin-top:10px;">① 무엇을 읽을지<br/>② 어떤 순서로 처리할지<br/>③ 어떤 기준으로 판단할지</div>
+          <div class="term" style="margin-top:22px;"><span class="tt">역할</span><span class="tb">업무 절차 · 판단 기준 · 출력 형식</span></div>
+        </div>
+        <div class="demo" style="padding:22px 24px;border-color:rgba(167,139,250,.55);min-height:250px;position:relative;">
+          <div style="display:flex;align-items:center;gap:12px;"><img src="assets/claude-character.png" alt="Claude Agent" style="width:42px;height:42px;object-fit:contain;"><div><div class="ctag pu">AGENT</div><div class="ct" style="font-size:24px;margin-top:5px;">규칙을 읽고 일을 합니다</div></div></div>
+          <div class="cb" style="margin-top:16px;">폴더와 파일을 읽고 → 순서대로 실행하고 → 결과물을 저장하고 → 기준에 맞는지 확인합니다.</div>
+          <div class="term" style="margin-top:22px;"><span class="tt">역할</span><span class="tb">실행 · 파일 생성 · 결과 확인</span></div>
+        </div>
+      </div>
+      <div class="bigmsg"><div class="bmlbl">판단 기준</div><div class="bmtxt">Skill만 있으면 <span class="hl">방법</span>이고,<br/>Agent까지 연결하면 <strong>실제로 돌아가는 업무</strong>가 됩니다.</div></div>
+    </div>`
+  });
+}
+if (multiBumperForNumber) multiBumperForNumber.html = multiBumperForNumber.html.replace('>04</div>', '>03</div>');
 for (let i = SLIDES.length - 1; i >= 0; i--) {
   if (SLIDES[i].html.includes('복습 · 0–5분') || SLIDES[i].html.includes('Agent는 어떻게 만드나요?') || SLIDES[i].html.includes('멀티 에이전트는 어떻게 만드나요?')) SLIDES.splice(i, 1);
 }
@@ -695,6 +730,46 @@ function fallback(txt, done){
 const stage = document.getElementById('stage');
 const dotsEl = document.getElementById('dots');
 let cur = 0, notesOpen = false, tx = 0;
+
+// 최종 흐름 보정: 준비 → Agent → Skill/실행 → Multi Agent 순서를 화면 생성 직전에 고정합니다.
+for (let i = SLIDES.length - 1; i >= 0; i--) {
+  if (SLIDES[i].html.includes('개념 · SKILL VS AGENT')) SLIDES.splice(i, 1);
+}
+const finalAgentBumper = SLIDES.find(slide => slide.html.includes('오늘 ① · 12–32분') && slide.html.includes('Agent를 만듭니다'));
+const finalMultiBumper = SLIDES.find(slide => slide.html.includes('오늘 ② · 32–50분') && slide.html.includes('Multi Agent를 만듭니다'));
+const finalSkillRange = SLIDES.find(slide => slide.html.includes('A. 아닙니다. Skill만 활용해도 됩니다.'));
+const backgroundExampleSlide = SLIDES.find(slide => slide.html.includes('background.md — Agent가 알아야 할 8가지'));
+if (backgroundExampleSlide) backgroundExampleSlide.html = `<div class="inner" style="max-width:1120px;">
+  <div class="kicker">준비 ① 산출물 · 사례</div>
+  <div class="h2" style="font-size:25px;">background.md에는 이런 내용이 담깁니다</div>
+  <div class="sub">예시 · 홍보 담당자의 뉴스 클리핑 업무를 배경 파일로 옮기면</div>
+  <div class="demo" style="margin-top:18px;padding:18px 20px;">
+    <div class="dlbl">background.md · 뉴스 클리핑 담당자의 업무 맥락</div>
+    <div style="display:grid;grid-template-columns:1fr 1.15fr;gap:20px;align-items:start;">
+      <div style="background:rgba(0,0,0,.22);border-radius:10px;padding:14px 16px;">
+        <div class="fline" style="padding:5px 0;"><b style="color:#A78BFA;">01 문제</b><span class="cb" style="margin-left:12px;">매일 뉴스 50건을 읽는 데 시간이 오래 걸린다</span></div>
+        <div class="fline" style="padding:5px 0;"><b style="color:#A78BFA;">02 업무</b><span class="cb" style="margin-left:12px;">홍보 담당자 · 매일 뉴스 클리핑</span></div>
+        <div class="fline" style="padding:5px 0;"><b style="color:#A78BFA;">03 순서</b><span class="cb" style="margin-left:12px;">50건 수집 → 10건 선별 → 한 줄 요약 → 메일</span></div>
+        <div class="fline" style="padding:5px 0;"><b style="color:#A78BFA;">04 기준</b><span class="cb" style="margin-left:12px;">기관 관련성 · 예산/제도 · 중복 여부</span></div>
+      </div>
+      <div style="display:grid;gap:10px;">
+        <div class="card am" style="padding:12px 16px;"><div class="ctag am">05 금지</div><div class="cb">원문에 없는 내용은 보태지 않기</div></div>
+        <div class="card bl" style="padding:12px 16px;"><div class="ctag bl">06 확인</div><div class="cb">발송 전 담당자가 최종 확인하기</div></div>
+        <div class="card gr" style="padding:12px 16px;"><div class="ctag gr">07 결과물</div><div class="cb">10건 한 줄 요약 · 같은 형식의 메일</div></div>
+        <div class="card pu" style="padding:12px 16px;"><div class="ctag pu">08 개선</div><div class="cb">매번 달라지는 형식을 고정하기</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="bigmsg"><div class="bmlbl">background.md의 역할</div><div class="bmtxt">AI가 업무를 처음 맡아도 <span class="hl">누구의 어떤 일인지</span><br/>무엇을 지키고 무엇을 만들어야 하는지 알게 합니다.</div></div>
+</div>`;
+if (finalAgentBumper) {
+  finalAgentBumper.html = finalAgentBumper.html.replace('>03</div>', '>02</div>');
+  if (finalSkillRange) {
+    SLIDES.splice(SLIDES.indexOf(finalSkillRange), 1);
+    SLIDES.splice(SLIDES.indexOf(finalAgentBumper) + 1, 0, finalSkillRange);
+  }
+}
+if (finalMultiBumper) finalMultiBumper.html = finalMultiBumper.html.replace('>04</div>', '>03</div>');
 
 document.getElementById('tot').textContent = SLIDES.length;
 SLIDES.forEach((s, i) => {
