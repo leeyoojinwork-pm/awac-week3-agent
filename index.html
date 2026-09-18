@@ -232,6 +232,9 @@ pre.prompt{background:rgba(8,12,20,.85);border:1px solid rgba(124,58,237,.3);bor
 .slide.active .skill-step-1::after{animation:skillArrowIn .35s ease .85s forwards;}
 .slide.active .skill-step-2::after{animation:skillArrowDown .35s ease 1.55s forwards;}
 .slide.active .skill-step-3::after{animation:skillArrowIn .35s ease 2.25s forwards;}
+.skill-flow-tree .skill-step-3{grid-column:2;grid-row:2;}
+.skill-flow-tree .skill-step-4{grid-column:1;grid-row:2;}
+.skill-flow-tree .skill-step-3::after{content:"←";left:-22px;right:auto;}
 @keyframes skillArrowIn{to{opacity:1;transform:translate(0,-50%);}}
 @keyframes skillArrowDown{to{opacity:1;transform:translate(50%,0);}}
 @media (prefers-reduced-motion:reduce){.skill-step::after{opacity:1;}.slide.active .skill-step::after{animation:none;}}
@@ -347,6 +350,7 @@ html,body{font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Goth
 .agbox{border:1px solid rgba(255,255,255,.14);border-radius:9px;padding:11px 13px;background:rgba(255,255,255,.03);transition:none;}
 .slide.active .agbox.a1{animation:glow 1.1s ease .2s forwards;}
 .slide.active .agbox.a2{animation:glow 1.1s ease 2.0s forwards;}
+.slide.active .agbox.execution-step{animation:glow 1.1s ease forwards;}
 @keyframes glow{0%{border-color:rgba(255,255,255,.14);background:rgba(255,255,255,.03);}
   45%{border-color:#7C3AED;background:rgba(124,58,237,.2);box-shadow:0 0 0 3px rgba(124,58,237,.14);}
   100%{border-color:rgba(124,58,237,.45);background:rgba(124,58,237,.1);box-shadow:none;}}
@@ -741,6 +745,7 @@ const finalAgentBumper = SLIDES.find(slide => slide.html.includes('오늘 ① ·
 const finalMultiBumper = SLIDES.find(slide => slide.html.includes('오늘 ② · 32–50분') && slide.html.includes('Multi Agent를 만듭니다'));
 const finalSkillRange = SLIDES.find(slide => slide.html.includes('A. 아닙니다. Skill만 활용해도 됩니다.'));
 const finalAgentVsChat = SLIDES.find(slide => slide.html.includes('AI는 이제 답변을 넘어, 업무를 직접 수행합니다'));
+const finalAgentExecution = SLIDES.find(slide => slide.html.includes('Agent는 네 단계를 순서대로 실행합니다'));
 const backgroundExampleSlide = SLIDES.find(slide => slide.html.includes('background.md — Agent가 알아야 할 8가지'));
 if (backgroundExampleSlide) backgroundExampleSlide.html = `<div class="inner" style="max-width:1120px;">
   <div class="kicker">준비 ① 산출물 · 사례</div>
@@ -810,6 +815,11 @@ if (finalAgentBumper) {
     SLIDES.splice(SLIDES.indexOf(finalSkillRange), 1);
     SLIDES.splice(SLIDES.indexOf(finalAgentVsChat) + 1, 0, finalSkillRange);
   }
+}
+if (finalSkillRange && finalAgentExecution) {
+  SLIDES.splice(SLIDES.indexOf(finalAgentExecution), 1);
+  finalAgentExecution.html = finalAgentExecution.html.replaceAll('class="agbox"', 'class="agbox execution-step"');
+  SLIDES.splice(SLIDES.indexOf(finalSkillRange) + 1, 0, finalAgentExecution);
 }
 if (finalMultiBumper) finalMultiBumper.html = finalMultiBumper.html.replace('>04</div>', '>03</div>');
 
