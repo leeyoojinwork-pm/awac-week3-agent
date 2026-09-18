@@ -746,6 +746,9 @@ for (let i = SLIDES.length - 1; i >= 0; i--) {
 const finalAgentBumper = SLIDES.find(slide => slide.html.includes('오늘 ① · 12–32분') && slide.html.includes('Agent를 만듭니다'));
 const finalMultiBumper = SLIDES.find(slide => slide.html.includes('오늘 ② · 32–50분') && slide.html.includes('Multi Agent를 만듭니다'));
 const finalSkillRange = SLIDES.find(slide => slide.html.includes('A. 아닙니다. Skill만 활용해도 됩니다.'));
+for (let i = SLIDES.length - 1; i >= 0; i--) {
+  if (SLIDES[i].html.includes('AI는 이제 답변을 넘어, 업무를 직접 수행합니다')) SLIDES.splice(i, 1);
+}
 const finalAgentVsChat = SLIDES.find(slide => slide.html.includes('AI는 이제 답변을 넘어, 업무를 직접 수행합니다'));
 const finalAgentExecution = SLIDES.find(slide => slide.html.includes('Agent는 네 단계를 순서대로 실행합니다'));
 const firstNewsCase = SLIDES.find(slide => slide.html.includes('머릿속 기준을 글로 꺼냈더니'));
