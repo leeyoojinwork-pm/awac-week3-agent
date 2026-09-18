@@ -921,6 +921,24 @@ if (firstNewsCase && agentBuildPages.length === 6 && finalAgentBumper) {
   const newsIndex = SLIDES.indexOf(firstNewsCase);
   pagesToMove.forEach((slide, offset) => SLIDES.splice(newsIndex + offset, 0, slide));
 }
+const singleAgentCaseSlide = SLIDES.find(slide => slide.html.includes('취업 준비 Agent 하나에 Skill을 연결합니다'));
+if (singleAgentCaseSlide && !SLIDES.some(slide => slide.html.includes('2-2') && slide.html.includes('SKILL VS AGENT'))) {
+  const skillVsAgentBumper = {
+    notes: 'Skill 하나를 연결하는 Single Agent 사례로 넘어가기 전에, Skill과 Agent의 차이를 사례로 확인하는 전환 장표입니다.',
+    html: `<div class="inner divslide" style="max-width:1000px;">
+  <div style="display:flex;align-items:center;gap:26px;">
+    <div style="font-size:76px;font-weight:900;line-height:1;color:rgba(124,58,237,.35);letter-spacing:-3px;">2-2</div>
+    <div style="flex:1;">
+      <div class="kicker" style="margin-bottom:6px;">사례 · 구조 비교</div>
+      <div class="h2" style="font-size:40px;line-height:1.25;">SKILL VS AGENT 사례 보기</div>
+      <div style="height:3px;width:74px;background:#7C3AED;border-radius:2px;margin:16px 0 14px;"></div>
+      <div class="sub" style="font-size:16px;">하나의 Agent에 Skill을 연결하는 경우부터 살펴봅니다.</div>
+    </div>
+  </div>
+</div>`
+  };
+  SLIDES.splice(SLIDES.indexOf(singleAgentCaseSlide), 0, skillVsAgentBumper);
+}
 if (backgroundSaveSlide && backgroundContentSlide) {
   const backgroundOrderIndex = Math.min(SLIDES.indexOf(backgroundSaveSlide), SLIDES.indexOf(backgroundContentSlide));
   SLIDES.splice(SLIDES.indexOf(backgroundSaveSlide), 1);
