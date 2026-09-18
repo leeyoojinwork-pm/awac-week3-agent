@@ -307,6 +307,9 @@ pre.prompt{background:rgba(8,12,20,.85);border:1px solid rgba(124,58,237,.3);bor
 .skill-agent-half .agent-char{width:38px;height:38px;margin:0 0 4px;}
 .skill-file-label{display:flex;align-items:center;gap:9px;}
 .skill-file-label::before{content:'';display:inline-block;width:16px;height:20px;border:2px solid #93C5FD;border-radius:3px;background:linear-gradient(135deg,transparent 0 55%,rgba(147,197,253,.25) 56% 100%);box-shadow:inset 0 -5px 0 rgba(147,197,253,.12);}
+.bg-continue-row{display:flex;align-items:baseline;gap:14px;padding:8px 0;color:#A78BFA;font-size:14px;font-weight:900;border-bottom:1px solid rgba(255,255,255,.08);}
+.bg-continue-row:last-child{border-bottom:0;}
+.bg-continue-row span{color:rgba(255,255,255,.62);font-size:13px;font-weight:600;}
 @media(max-width:760px){.skill-agent-compare{grid-template-columns:1fr;}.skill-agent-half.skill-side{border-right:0;border-bottom:1px solid rgba(167,139,250,.25);}}
 
 html,body{font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Segoe UI",sans-serif;}
@@ -785,6 +788,12 @@ if (backgroundExampleSlide) backgroundExampleSlide.html = backgroundExampleSlide
   '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">',
   '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><div style="grid-column:1/-1;color:#A78BFA;font-size:12px;font-weight:800;margin-bottom:1px;">← 앞의 01–04에서 이어지는 내용</div>'
 );
+if (backgroundExampleSlide) backgroundExampleSlide.html = backgroundExampleSlide.html
+  .replace('grid-template-columns:1fr 1fr;gap:8px;', 'grid-template-columns:1fr;gap:2px;')
+  .replace('<div class="card am" style="padding:9px 12px;"><div class="ctag am">05 금지</div><div class="cb">원문에 없는 내용은 보태지 않기</div></div>', '<div class="bg-continue-row">← 05 금지 <span>원문에 없는 내용은 보태지 않기</span></div>')
+  .replace('<div class="card bl" style="padding:9px 12px;"><div class="ctag bl">06 확인</div><div class="cb">발송 전 담당자가 최종 확인하기</div></div>', '<div class="bg-continue-row">← 06 확인 <span>발송 전 담당자가 최종 확인하기</span></div>')
+  .replace('<div class="card gr" style="padding:9px 12px;"><div class="ctag gr">07 결과물</div><div class="cb">10건 한 줄 요약 · 같은 형식의 메일</div></div>', '<div class="bg-continue-row">← 07 결과물 <span>10건 한 줄 요약 · 같은 형식의 메일</span></div>')
+  .replace('<div class="card pu" style="padding:9px 12px;"><div class="ctag pu">08 개선</div><div class="cb">매번 달라지는 형식을 고정하기</div></div>', '<div class="bg-continue-row">← 08 개선 <span>매번 달라지는 형식을 고정하기</span></div>');
 if (backgroundExampleSlide) {
   let backgroundLineDelay = 0.18;
   backgroundExampleSlide.html = backgroundExampleSlide.html.replaceAll('class="fline" style="padding:5px 0;"', () => {
