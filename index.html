@@ -754,6 +754,9 @@ for (let i = SLIDES.length - 1; i >= 0; i--) {
   if (SLIDES[i].html.includes('검토 전용 채팅방을 하나 더 엽니다')) SLIDES.splice(i, 1);
 }
 for (let i = SLIDES.length - 1; i >= 0; i--) {
+  if (SLIDES[i].html.includes('오늘 남은 것과 다음 주') || SLIDES[i].html.includes('마무리 · 다음 주')) SLIDES.splice(i, 1);
+}
+for (let i = SLIDES.length - 1; i >= 0; i--) {
   if (SLIDES[i].html.includes('AI는 이제 답변을 넘어, 업무를 직접 수행합니다')) SLIDES.splice(i, 1);
 }
 const finalAgentVsChat = SLIDES.find(slide => slide.html.includes('AI는 이제 답변을 넘어, 업무를 직접 수행합니다'));
@@ -946,6 +949,60 @@ if (singleAgentCaseSlide && !SLIDES.some(slide => slide.html.includes('2-2') && 
   };
   SLIDES.splice(SLIDES.indexOf(singleAgentCaseSlide), 0, skillVsAgentBumper);
 }
+const structureExampleSlide = SLIDES.find(slide => slide.html.includes('작성한 구조도 예시'));
+if (structureExampleSlide && !SLIDES.some(slide => slide.html.includes('최종 제출 전 사람이 확인할 기준'))) {
+  const finalReviewSlide = {
+    notes: 'Agent가 만든 구조와 결과물은 사람이 마지막으로 확인합니다. 이 기준을 통과한 것만 최종 제출합니다.',
+    html: `<div class="inner" style="max-width:1120px;">
+  <div class="kicker">최종 제출 · 사람 검수</div>
+  <div class="h2" style="font-size:25px;">최종 제출 전 사람이 확인할 기준</div>
+  <div class="sub">Agent가 잘 일했는지, 결과물을 그대로 믿지 않고 마지막으로 확인합니다.</div>
+  <div class="g3" style="margin-top:22px;">
+    <div class="card bl"><div class="ctag bl">01 · 근거</div><div class="ct">내가 말한 내용만 들어갔나?</div><div class="cb">추측하거나 없는 내용을 보태지 않았는지 확인합니다.</div></div>
+    <div class="card am"><div class="ctag am">02 · 누락</div><div class="ct">빠진 내용은 없나?</div><div class="cb">담당자 · 기한 · 확인 지점처럼 꼭 필요한 항목을 봅니다.</div></div>
+    <div class="card gr"><div class="ctag gr">03 · 형식</div><div class="ct">바로 제출할 수 있나?</div><div class="cb">정해둔 결과물 모양과 파일 위치를 지켰는지 확인합니다.</div></div>
+  </div>
+  <div class="bigmsg"><div class="bmlbl">최종 제출</div><div class="bmtxt">Agent가 만든 결과물을 <span class="hl">사람이 확인한 뒤</span><br/>최종 결과물로 제출합니다.</div></div>
+</div>`
+  };
+  SLIDES.splice(SLIDES.indexOf(structureExampleSlide) + 1, 0, finalReviewSlide);
+}
+const finalReviewOutputSlide = SLIDES.find(slide => slide.html.includes('최종 제출 전 사람이 확인할 기준'));
+if (finalReviewOutputSlide && !SLIDES.some(slide => slide.html.includes('검수 Agent가 최종 산출물을 확인합니다'))) {
+  const finalOutputAgentSlide = {
+    notes: '최종 산출물 장표입니다. 검수 Agent가 네 가지 포인트를 확인하고, 애매하면 보류 큐로 보내며, 통과한 초안만 사람이 최종 판단합니다.',
+    html: `<div class="inner" style="max-width:1120px;">
+  <div class="kicker">최종 산출물 · 검수 Agent</div>
+  <div class="h2" style="font-size:25px;">검수 Agent가 최종 산출물을 확인합니다</div>
+  <div class="sub">네 가지 기준을 먼저 확인하고, 사람이 마지막에 사실관계와 톤을 봅니다.</div>
+  <div class="demo" style="margin-top:18px;padding:18px 20px;">
+    <div class="dlbl">검수 Agent · 최종 제출 흐름</div>
+    <div style="display:flex;justify-content:center;">
+      <div class="agbox" style="min-width:230px;text-align:center;border-color:#7C3AED;background:rgba(124,58,237,.16);">
+        <div style="font-size:11px;color:#C4B5FD;font-weight:900;letter-spacing:.08em;">OUTPUT</div>
+        <div style="font-weight:900;font-size:18px;color:#fff;margin-top:5px;">결과물.md</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.55);margin-top:4px;">작성 Agent가 만든 초안</div>
+      </div>
+    </div>
+    <div style="text-align:center;color:#A78BFA;font-size:22px;margin:7px 0;">↓</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;">
+      <div class="card bl" style="padding:13px 12px;text-align:center;"><div class="ctag bl">01</div><div class="ct" style="font-size:14px;">근거 확인</div><div class="cb" style="font-size:11px;">말하지 않은 내용은 없는가</div></div>
+      <div class="card am" style="padding:13px 12px;text-align:center;"><div class="ctag am">02</div><div class="ct" style="font-size:14px;">누락 확인</div><div class="cb" style="font-size:11px;">담당자·기한이 빠지지 않았나</div></div>
+      <div class="card pu" style="padding:13px 12px;text-align:center;"><div class="ctag pu">03</div><div class="ct" style="font-size:14px;">형식 확인</div><div class="cb" style="font-size:11px;">정해둔 모양과 위치인가</div></div>
+      <div class="card rd" style="padding:13px 12px;text-align:center;"><div class="ctag rd">04</div><div class="ct" style="font-size:14px;">금지 확인</div><div class="cb" style="font-size:11px;">추측·과장이 섞이지 않았나</div></div>
+    </div>
+    <div style="text-align:center;color:#A78BFA;font-size:22px;margin:7px 0;">↓</div>
+    <div style="display:grid;grid-template-columns:1fr 36px 1fr;gap:8px;align-items:center;">
+      <div class="card am" style="padding:13px 16px;text-align:center;"><div class="ctag am">판정 애매</div><div class="ct">보류 큐 · 재확인 대기</div><div class="cb">근거가 없으면 사람에게 질문하고 다시 확인합니다.</div></div>
+      <div style="text-align:center;color:#A78BFA;font-size:22px;">→</div>
+      <div class="card gr" style="padding:13px 16px;text-align:center;"><div class="ctag gr">판정 통과</div><div class="ct">초안 생성</div><div class="cb">사람 검수 단계로 넘깁니다.</div></div>
+    </div>
+  </div>
+  <div class="bigmsg"><div class="bmlbl">사람 검수 포인트</div><div class="bmtxt"><span class="hl">사실관계 · 톤 · 최종 판단</span>은 사람이 확인하고<br/>통과한 결과물만 최종 제출합니다.</div></div>
+</div>`
+  };
+  SLIDES.splice(SLIDES.indexOf(finalReviewOutputSlide) + 1, 0, finalOutputAgentSlide);
+}
 if (backgroundSaveSlide && backgroundContentSlide) {
   const backgroundOrderIndex = Math.min(SLIDES.indexOf(backgroundSaveSlide), SLIDES.indexOf(backgroundContentSlide));
   SLIDES.splice(SLIDES.indexOf(backgroundSaveSlide), 1);
@@ -953,6 +1010,11 @@ if (backgroundSaveSlide && backgroundContentSlide) {
   SLIDES.splice(backgroundOrderIndex, 0, backgroundSaveSlide, backgroundContentSlide);
 }
 if (finalMultiBumper) finalMultiBumper.html = finalMultiBumper.html.replace('>04</div>', '>03</div>');
+if (SLIDES.length >= 29) {
+  const page28 = SLIDES[27];
+  SLIDES[27] = SLIDES[28];
+  SLIDES[28] = page28;
+}
 
 document.getElementById('tot').textContent = SLIDES.length;
 SLIDES.forEach((s, i) => {
