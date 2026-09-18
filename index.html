@@ -630,7 +630,9 @@ if (multiCriteriaSlide) {
     .replace('<div class="ct">결과물을 확인합니다</div>', '<div class="ct">면접만 봅니다</div>')
     .replace('채용 공고를 읽고 이력서를 맞춥니다.', '채용 공고와 이력서 기준으로 결과물을 만듭니다.')
     .replace('완성된 이력서를 바탕으로 면접 답변을 준비합니다.', '완성된 이력서와 면접 기준으로 답변을 확인합니다.')
-    .replace('업무를 <span class="hl">서로 다른 담당 단위</span>로 나눌 수 있을 때<br/>Multi Agent로 연결합니다.', '모든 일을 한 Agent가 이해하게 하지 않고,<br/><span class="hl">담당별로 필요한 맥락만 줍니다.</span>');
+    .replace('업무를 <span class="hl">서로 다른 담당 단위</span>로 나눌 수 있을 때<br/>Multi Agent로 연결합니다.', '모든 일을 한 Agent가 이해하게 하지 않고,<br/><span class="hl">담당별로 필요한 맥락만 줍니다.</span>')
+    .replaceAll('min-height:180px;', 'min-height:132px;')
+    .replace('margin-top:18px;', 'margin-top:12px;');
 }
 if (finalSkillSlide) finalSkillSlide.html = finalSkillSlide.html.replace('<div class="bigmsg"><div class="bmlbl">SKILL vs AGENT</div><div class="bmtxt">반복되는 처리 방법이면 <span class="hl">Skill</span>,<br/>스스로 계획하고 결과를 확인하면 <span class="hl">Agent</span>입니다.</div></div>', '<div class="skill-agent-compare"><div class="skill-agent-half skill-side"><div class="compare-label">SKILL.md</div><strong>반복되는 처리 방법</strong><span>한 업무의 순서와 기준을 적어둡니다.<br/>기존 Agent에 방법만 추가합니다.</span></div><div class="skill-agent-half agent-side"><img class="agent-char" src="assets/claude-character.png" alt="Claude Agent"><div class="compare-label">AGENT</div><strong>업무를 직접 수행</strong><span>목표를 이해하고 Skill을 실행합니다.<br/>결과를 확인하고 필요하면 다시 처리합니다.</span></div></div>');
 if (SLIDES[0]) SLIDES[0].html = SLIDES[0].html.replace('<div class="cover-goal">오늘의 목표<br/><strong>AI가 일하는 흐름을 직접 만들고 확인합니다.</strong></div>', '');
@@ -746,6 +748,9 @@ for (let i = SLIDES.length - 1; i >= 0; i--) {
 const finalAgentBumper = SLIDES.find(slide => slide.html.includes('오늘 ① · 12–32분') && slide.html.includes('Agent를 만듭니다'));
 const finalMultiBumper = SLIDES.find(slide => slide.html.includes('오늘 ② · 32–50분') && slide.html.includes('Multi Agent를 만듭니다'));
 const finalSkillRange = SLIDES.find(slide => slide.html.includes('A. 아닙니다. Skill만 활용해도 됩니다.'));
+for (let i = SLIDES.length - 1; i >= 0; i--) {
+  if (SLIDES[i].html.includes('검토 전용 채팅방을 하나 더 엽니다')) SLIDES.splice(i, 1);
+}
 for (let i = SLIDES.length - 1; i >= 0; i--) {
   if (SLIDES[i].html.includes('AI는 이제 답변을 넘어, 업무를 직접 수행합니다')) SLIDES.splice(i, 1);
 }
