@@ -352,6 +352,7 @@ SLIDES[4].html = "<div class=\"inner\" style=\"max-width:1160px;\"><div class=\"
 const concreteExamplePage = SLIDES[3];
 const agentCriteriaPage = SLIDES[4];
 SLIDES.splice(3, 2, concreteExamplePage, agentCriteriaPage);
+SLIDES[4].html = SLIDES[4].html.replaceAll('그냥 대화', '일회성 대화');
 
 function fallback(txt, done){
   const ta = document.createElement('textarea');
