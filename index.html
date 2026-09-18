@@ -746,6 +746,14 @@ const finalMultiBumper = SLIDES.find(slide => slide.html.includes('오늘 ② ·
 const finalSkillRange = SLIDES.find(slide => slide.html.includes('A. 아닙니다. Skill만 활용해도 됩니다.'));
 const finalAgentVsChat = SLIDES.find(slide => slide.html.includes('AI는 이제 답변을 넘어, 업무를 직접 수행합니다'));
 const finalAgentExecution = SLIDES.find(slide => slide.html.includes('Agent는 네 단계를 순서대로 실행합니다'));
+const firstNewsCase = SLIDES.find(slide => slide.html.includes('머릿속 기준을 글로 꺼냈더니'));
+const agentBuildPages = [
+  slide => slide.html.includes('일하는 순서를 다섯 칸으로'),
+  slide => slide.html.includes('다섯 칸은 AI가 채웁니다'),
+  slide => slide.html.includes('AI가 쓰고, 나는 고칩니다'),
+  slide => slide.html.includes('한 번 돌립니다 → 결과물.md'),
+  slide => slide.html.includes('Agent 하나 완성')
+].map(predicate => SLIDES.find(predicate)).filter(Boolean);
 const backgroundExampleSlide = SLIDES.find(slide => slide.html.includes('background.md — Agent가 알아야 할 8가지'));
 if (backgroundExampleSlide) backgroundExampleSlide.html = `<div class="inner" style="max-width:1120px;">
   <div class="kicker">준비 ① 산출물 · 사례</div>
@@ -820,6 +828,12 @@ if (finalSkillRange && finalAgentExecution) {
   SLIDES.splice(SLIDES.indexOf(finalAgentExecution), 1);
   finalAgentExecution.html = finalAgentExecution.html.replaceAll('class="agbox"', 'class="agbox execution-step"');
   SLIDES.splice(SLIDES.indexOf(finalSkillRange) + 1, 0, finalAgentExecution);
+}
+if (firstNewsCase && agentBuildPages.length === 5 && finalAgentBumper) {
+  const pagesToMove = [finalAgentBumper, ...agentBuildPages];
+  pagesToMove.forEach(slide => SLIDES.splice(SLIDES.indexOf(slide), 1));
+  const newsIndex = SLIDES.indexOf(firstNewsCase);
+  pagesToMove.forEach((slide, offset) => SLIDES.splice(newsIndex + offset, 0, slide));
 }
 if (finalMultiBumper) finalMultiBumper.html = finalMultiBumper.html.replace('>04</div>', '>03</div>');
 
