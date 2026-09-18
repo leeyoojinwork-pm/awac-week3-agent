@@ -302,6 +302,8 @@ pre.prompt{background:rgba(8,12,20,.85);border:1px solid rgba(124,58,237,.3);bor
 .skill-agent-half strong{display:block;font-size:18px;color:#fff;margin-top:8px;}
 .skill-agent-half span{display:block;font-size:12px;line-height:1.6;color:rgba(255,255,255,.58);margin-top:6px;}
 .skill-agent-half .agent-char{width:38px;height:38px;margin:0 0 4px;}
+.skill-file-label{display:flex;align-items:center;gap:9px;}
+.skill-file-label::before{content:'';display:inline-block;width:16px;height:20px;border:2px solid #93C5FD;border-radius:3px;background:linear-gradient(135deg,transparent 0 55%,rgba(147,197,253,.25) 56% 100%);box-shadow:inset 0 -5px 0 rgba(147,197,253,.12);}
 @media(max-width:760px){.skill-agent-compare{grid-template-columns:1fr;}.skill-agent-half.skill-side{border-right:0;border-bottom:1px solid rgba(167,139,250,.25);}}
 
 html,body{font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Segoe UI",sans-serif;}
@@ -777,6 +779,7 @@ if (backgroundExampleSlide) {
     return style;
   });
 }
+if (finalSkillRange) finalSkillRange.html = finalSkillRange.html.replaceAll('<div class="compare-label">SKILL.md</div>', '<div class="compare-label skill-file-label">SKILL.md</div>');
 const newsCaseForFolderIntro = SLIDES.find(slide => slide.html.includes('머릿속 기준을 글로 꺼냈더니'));
 if (newsCaseForFolderIntro && !SLIDES.some(slide => slide.html.includes('Agent가 먼저 나누는 업무 폴더'))) {
   const folderIntro = {
