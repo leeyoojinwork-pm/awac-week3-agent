@@ -187,6 +187,15 @@ pre.prompt{background:rgba(8,12,20,.85);border:1px solid rgba(124,58,237,.3);bor
 .case-strip{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
 .case-chip{border-radius:99px;padding:5px 10px;font-size:11px;font-weight:700;color:#E9D5FF;background:rgba(124,58,237,.18);border:1px solid rgba(167,139,250,.32);}
 @media(max-width:760px){.cover-structured{grid-template-columns:1fr}.cover-main{min-height:390px;padding:28px 24px}.cover-side{padding:18px}.cover-title{font-size:58px}.slide{padding:22px 42px}.g2,.g3,.ba{grid-template-columns:1fr!important}}
+/* 표지: 기존 프레임을 유지하고 보라색만 적용 */
+.cover-structured{display:block;max-width:1280px;margin:0 auto;}
+.cover-main{border:0;border-radius:0;background:none;box-shadow:none;padding:10px 4px 0;min-height:0;display:block;}
+.cover-side{display:none;}
+.cover-eyebrow{color:#A78BFA;}
+.cover-title{font-size:clamp(58px,8vw,96px);margin-top:26px;}
+.cover-rule{background:rgba(167,139,250,.28);margin:34px 0 18px;}
+.cover-caption{font-size:19px;color:rgba(255,255,255,.66);}
+.cover-goal{margin-top:42px;color:#E9D5FF;border-left-color:#7C3AED;}
 .ba{grid-template-columns:1fr 1fr;}
 .flow{justify-content:center;}
 .inner{max-width:900px;}
