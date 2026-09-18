@@ -235,6 +235,18 @@ pre.prompt{background:rgba(8,12,20,.85);border:1px solid rgba(124,58,237,.3);bor
 @keyframes skillArrowIn{to{opacity:1;transform:translate(0,-50%);}}
 @keyframes skillArrowDown{to{opacity:1;transform:translate(50%,0);}}
 @media (prefers-reduced-motion:reduce){.skill-step::after{opacity:1;}.slide.active .skill-step::after{animation:none;}}
+.skill-flow-tree .agent-tree-stem,.skill-flow-tree .agent-tree-branches::before,.skill-flow-tree .agent-tree-branch::before{background:linear-gradient(90deg,rgba(124,58,237,.2),#A78BFA,rgba(124,58,237,.2));background-size:200% 100%;}
+.skill-flow-tree .agent-tree-stem{transform-origin:top;transform:scaleY(0);opacity:0;}
+.slide.active .skill-flow-tree .agent-tree-stem{animation:skillLineDown .45s ease .55s forwards,skillLineGlow 1.2s linear 1.05s infinite;}
+.skill-flow-tree .agent-tree-branches::before{transform:scaleX(0);transform-origin:left;}
+.slide.active .skill-flow-tree .agent-tree-branches::before{animation:skillLineAcross .55s ease 1s forwards,skillLineGlow 1.2s linear 1.55s infinite;}
+.skill-flow-tree .agent-tree-branch::before{transform:scaleY(0);transform-origin:top;}
+.slide.active .skill-flow-tree .agent-tree-branch::before{animation:skillLineDown .35s ease var(--skill-branch-delay,.95s) forwards,skillLineGlow 1.2s linear calc(var(--skill-branch-delay,.95s) + .35s) infinite;}
+.skill-flow-tree .skill-step-1{--skill-branch-delay:1.15s;}.skill-flow-tree .skill-step-2{--skill-branch-delay:1.45s;}.skill-flow-tree .skill-step-3{--skill-branch-delay:2.05s;}.skill-flow-tree .skill-step-4{--skill-branch-delay:2.35s;}
+@keyframes skillLineDown{to{transform:scaleY(1);opacity:1;}}
+@keyframes skillLineAcross{to{transform:scaleX(1);opacity:1;}}
+@keyframes skillLineGlow{0%,100%{background-position:0 0;filter:brightness(.85);}50%{background-position:100% 0;filter:brightness(1.5);}}
+@media (prefers-reduced-motion:reduce){.skill-flow-tree .agent-tree-stem,.skill-flow-tree .agent-tree-branches::before,.skill-flow-tree .agent-tree-branch::before{transform:none;opacity:1;animation:none;}}
 .delayed-output{opacity:0;transform:translateY(8px);}
 .slide.active .delayed-output{animation:outputIn .5s ease forwards;}
 .slide.active .output-resume{animation-delay:2.7s;}
@@ -262,7 +274,14 @@ pre.prompt{background:rgba(8,12,20,.85);border:1px solid rgba(124,58,237,.3);bor
 .presentation-flow>.card .ct{font-size:17px;line-height:1.35;}
 .presentation-flow>.card .cb{font-size:12px;margin-top:9px;line-height:1.45;}
 .presentation-flow>.presentation-arrow{align-self:center;text-align:center;color:#A78BFA;font-size:26px;}
-@media(max-width:760px){.presentation-flow{grid-template-columns:1fr 1fr!important;}.presentation-flow>.presentation-arrow{display:none;}}
+.presentation-flow{grid-template-columns:1fr!important;gap:0!important;padding:0 10px;}
+.presentation-flow>.presentation-arrow{display:none!important;}
+.presentation-flow>.card{display:grid!important;grid-template-columns:52px 150px 1fr 220px;grid-template-rows:1fr;align-items:center;text-align:left!important;min-height:72px!important;padding:10px 6px!important;border-top:0!important;border-bottom:1px solid rgba(255,255,255,.1)!important;}
+.presentation-flow>.card .sn{margin:0!important;}
+.presentation-flow>.card .ctag{margin:0!important;}
+.presentation-flow>.card .ct{font-size:16px;}
+.presentation-flow>.card .cb{margin:0!important;text-align:right;}
+@media(max-width:760px){.presentation-flow{grid-template-columns:1fr!important;gap:0!important;}.presentation-flow>.presentation-arrow{display:none!important;}.presentation-flow>.card{grid-template-columns:38px 92px 1fr!important;min-height:68px!important;padding:10px 5px!important;}.presentation-flow>.card .ct{font-size:13px;}.presentation-flow>.card .cb{font-size:10px;}.presentation-flow>.card .sn{width:28px;height:28px;font-size:12px;margin:0!important;}}
 .split-ai{display:grid;grid-template-columns:1fr 70px 1fr;align-items:stretch;gap:14px;}
 .split-ai-panel{padding:30px 28px;border-radius:18px;min-height:235px;display:flex;flex-direction:column;justify-content:center;}
 .chatbot-panel{background:linear-gradient(145deg,rgba(30,41,59,.95),rgba(69,10,10,.7));border:1px solid rgba(248,113,113,.45);}
@@ -457,6 +476,7 @@ if (singleAgentIndex >= 0) SLIDES.splice(singleAgentIndex + 1, 0, {notes:"Single
 const singleStructureSlide = SLIDES.find(slide => slide.html.includes('방 하나에서 처리합니다'));
 if (singleStructureSlide) singleStructureSlide.html = "<div class=\"inner\" style=\"max-width:1120px;\"><div class=\"kicker\">사례 · 취업 준비 / Single Agent</div><div class=\"h2\" style=\"font-size:25px;\">취업 준비 Agent 하나에 Skill을 연결합니다 <span style=\"color:#A78BFA;\">(채팅방 1개)</span></div><div class=\"sub\">하나의 Agent가 네 가지 Skill을 순서대로 수행합니다.</div><div class=\"agent-tree\" style=\"margin-top:20px;\"><div class=\"agent-tree-root\"><img src=\"assets/claude-character.png\" alt=\"취업 준비 Agent\"><span>취업 준비 Agent<br><small style=\"font-size:11px;color:#C4B5FD;font-weight:600;\">Single Agent · 채팅방 1개</small></span></div><div class=\"agent-tree-stem\"></div><div class=\"agent-tree-branches\" style=\"width:min(820px,100%);gap:14px;\"><div class=\"agent-tree-branch skill-step skill-step-1\"><div class=\"agent-tree-card\"><b>Skill 1 · JD 분석</b><span>채용 공고의 요구 조건을 정리합니다.</span></div></div><div class=\"agent-tree-branch skill-step skill-step-2\"><div class=\"agent-tree-card\"><b>Skill 2 · 이력서 맞춤</b><span>공고에 맞춰 이력서 내용을 조정합니다.</span></div></div><div class=\"agent-tree-branch skill-step skill-step-3\"><div class=\"agent-tree-card\"><b>Skill 3 · 예상질문</b><span>면접에서 나올 질문을 정리합니다.</span></div></div><div class=\"agent-tree-branch skill-step skill-step-4\"><div class=\"agent-tree-card\"><b>Skill 4 · 답변 다듬기</b><span>질문에 대한 답변을 구체화합니다.</span></div></div></div></div></div>";
 if (singleStructureSlide) {
+  singleStructureSlide.html = singleStructureSlide.html.replace('<div class="agent-tree" style="margin-top:20px;">', '<div class="agent-tree skill-flow-tree" style="margin-top:20px;">');
   const singlePageIndex = SLIDES.indexOf(singleStructureSlide);
   SLIDES.splice(singlePageIndex, 0, {notes:"판단 기준을 확인한 뒤 실제 취업 준비 사례로 넘어가는 전환 장표입니다.",html:"<div class=\"inner divslide\" style=\"max-width:1000px;\"><div style=\"display:flex;align-items:center;gap:26px;\"><div style=\"font-size:92px;font-weight:900;line-height:1;color:rgba(124,58,237,.35);letter-spacing:-3px;\">01</div><div style=\"flex:1;\"><div class=\"kicker\" style=\"margin-bottom:6px;\">판단 · 다음 단계</div><div class=\"h2\" style=\"font-size:40px;line-height:1.25;\">꼭 Agent로 만들어야 하나요?</div><div style=\"height:3px;width:74px;background:#7C3AED;border-radius:2px;margin:16px 0 14px;\"></div><div class=\"sub\" style=\"font-size:16px;\">반복되는 업무라도, 필요한 구조에 따라 Skill 또는 Agent를 선택합니다.</div></div><div class=\"agbox\" style=\"min-width:130px;text-align:center;animation-delay:.2s;\"><div style=\"font-size:11px;color:rgba(255,255,255,.45);\">다음 사례</div><div style=\"font-size:22px;font-weight:900;color:#fff;margin-top:4px;\">취업 준비</div></div></div></div>"});
 }
@@ -590,7 +610,22 @@ if (finalCriteriaSlide && finalSkillSlide && SLIDES.indexOf(finalSkillSlide) > S
 if (finalCriteriaSlide) finalCriteriaSlide.html = finalCriteriaSlide.html.replace('꼭 Agent로 만들어야 하나요?', 'Agent로 만들어야 하는 기준');
 const singleTransitionSlide = SLIDES.find(slide => slide.html.includes('다음 사례') && slide.html.includes('취업 준비') && slide.html.includes('꼭 Agent로 만들어야 하나요?'));
 if (singleTransitionSlide) singleTransitionSlide.html = singleTransitionSlide.html.replace('꼭 Agent로 만들어야 하나요?', 'Agent는 어떻게 만드나요?');
+const multiTransitionSlide = SLIDES.find(slide => slide.html.includes('멀티 에이전트는 어떻게 만드나요?'));
+if (multiTransitionSlide) multiTransitionSlide.html = multiTransitionSlide.html.replace('꼭 Multi Agent로 만들어야 하나요?<br/>멀티 에이전트는 어떻게 만드나요?', '멀티 에이전트는 어떻게 만드나요?');
+const multiCriteriaSlide = SLIDES.find(slide => slide.html.includes('A. 담당자를 분리할 수 있어야 합니다.'));
+if (multiCriteriaSlide) {
+  multiCriteriaSlide.html = multiCriteriaSlide.html
+    .replace('한 Agent가 모두 맡는 대신, 서로 다른 결과를 만드는 담당 단위로 나눌 수 있어야 합니다.', '한 Agent가 모든 맥락을 들고 일하게 하지 않고, 각자 맡은 일에 필요한 맥락만 보게 나눕니다.')
+    .replace('<div class="ct">결과물을 만듭니다</div><div class="cb">채용 공고를 읽고 이력서를 맞춥니다.</div>', '<div class="ct">이력서만 봅니다</div><div class="cb">채용 공고와 이력서 기준으로 결과물을 만듭니다.</div>')
+    .replace('<div class="ct">결과물을 확인합니다</div><div class="cb">완성된 이력서를 바탕으로 면접 답변을 준비합니다.</div>', '<div class="ct">면접만 봅니다</div><div class="cb">완성된 이력서와 면접 기준으로 답변을 확인합니다.</div>')
+    .replace('<div class="ct">결과물을 만듭니다</div>', '<div class="ct">이력서만 봅니다</div>')
+    .replace('<div class="ct">결과물을 확인합니다</div>', '<div class="ct">면접만 봅니다</div>')
+    .replace('채용 공고를 읽고 이력서를 맞춥니다.', '채용 공고와 이력서 기준으로 결과물을 만듭니다.')
+    .replace('완성된 이력서를 바탕으로 면접 답변을 준비합니다.', '완성된 이력서와 면접 기준으로 답변을 확인합니다.')
+    .replace('업무를 <span class="hl">서로 다른 담당 단위</span>로 나눌 수 있을 때<br/>Multi Agent로 연결합니다.', '모든 일을 한 Agent가 이해하게 하지 않고,<br/><span class="hl">담당별로 필요한 맥락만 줍니다.</span>');
+}
 if (finalSkillSlide) finalSkillSlide.html = finalSkillSlide.html.replace('<div class="bigmsg"><div class="bmlbl">SKILL vs AGENT</div><div class="bmtxt">반복되는 처리 방법이면 <span class="hl">Skill</span>,<br/>스스로 계획하고 결과를 확인하면 <span class="hl">Agent</span>입니다.</div></div>', '<div class="skill-agent-compare"><div class="skill-agent-half skill-side"><div class="compare-label">SKILL.md</div><strong>반복되는 처리 방법</strong><span>한 업무의 순서와 기준을 적어둡니다.<br/>기존 Agent에 방법만 추가합니다.</span></div><div class="skill-agent-half agent-side"><img class="agent-char" src="assets/claude-character.png" alt="Claude Agent"><div class="compare-label">AGENT</div><strong>업무를 직접 수행</strong><span>목표를 이해하고 Skill을 실행합니다.<br/>결과를 확인하고 필요하면 다시 처리합니다.</span></div></div>');
+if (SLIDES[0]) SLIDES[0].html = SLIDES[0].html.replace('<div class="cover-goal">오늘의 목표<br/><strong>AI가 일하는 흐름을 직접 만들고 확인합니다.</strong></div>', '');
 
 const newsExampleSlide = SLIDES.find(slide => slide.html.includes('머릿속 기준을 글로 꺼냈더니'));
 if (newsExampleSlide) {
