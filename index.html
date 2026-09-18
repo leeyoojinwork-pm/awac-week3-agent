@@ -765,6 +765,10 @@ if (backgroundExampleSlide) backgroundExampleSlide.html = `<div class="inner" st
 if (backgroundExampleSlide) backgroundExampleSlide.html = backgroundExampleSlide.html
   .replace('display:grid;gap:10px;', 'display:grid;grid-template-columns:1fr 1fr;gap:8px;')
   .replaceAll('padding:12px 16px;', 'padding:9px 12px;');
+if (backgroundExampleSlide) backgroundExampleSlide.html = backgroundExampleSlide.html.replace(
+  '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">',
+  '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><div style="grid-column:1/-1;color:#A78BFA;font-size:12px;font-weight:800;margin-bottom:1px;">← 앞의 01–04에서 이어지는 내용</div>'
+);
 if (backgroundExampleSlide) {
   let backgroundLineDelay = 0.18;
   backgroundExampleSlide.html = backgroundExampleSlide.html.replaceAll('class="fline" style="padding:5px 0;"', () => {
