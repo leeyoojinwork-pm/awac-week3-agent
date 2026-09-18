@@ -211,6 +211,8 @@ pre.prompt{background:rgba(8,12,20,.85);border:1px solid rgba(124,58,237,.3);bor
 .agent-tree-card{padding:14px 16px;border:1px solid rgba(255,255,255,.15);border-radius:12px;background:rgba(255,255,255,.045);text-align:left;}
 .agent-tree-card b{display:block;color:#C4B5FD;font-size:15px;margin-bottom:5px;}
 .agent-tree-card span{font-size:12px;color:rgba(255,255,255,.52);}
+.slide{overflow:hidden!important;}
+.slide>.inner{overflow:visible;}
 .ba{grid-template-columns:1fr 1fr;}
 .flow{justify-content:center;}
 .inner{max-width:900px;}
@@ -383,6 +385,7 @@ SLIDES.forEach(slide => {
   }
 });
 SLIDES[3].html = "<div class=\"inner\" style=\"max-width:1080px;\"><div class=\"divslide\" style=\"min-height:520px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;\"><div class=\"kicker\" style=\"font-size:13px;\">개념 · Agent</div><div style=\"font-size:clamp(34px,5vw,62px);font-weight:900;letter-spacing:-.06em;line-height:1.08;color:#fff;margin:14px 0 8px;\">그래서,<br/><span style=\"color:#A78BFA;\">Agent 개념이 뭔데?</span></div><div style=\"font-size:18px;line-height:1.65;color:rgba(255,255,255,.62);margin-top:8px;\">업무를 수행하는 Agent와<br/><strong style=\"color:#fff;\">결과를 점검하는 Agent</strong>로 나눠 일하게 합니다.</div><div class=\"agent-tree\"><div class=\"agent-tree-root\"><img src=\"assets/claude-character.png\" alt=\"Agent 캐릭터\"><span>Agent<br><small style=\"font-size:11px;color:#C4B5FD;font-weight:600;\">업무를 맡는 역할</small></span></div><div class=\"agent-tree-stem\"></div><div class=\"agent-tree-branches\"><div class=\"agent-tree-branch\"><div class=\"agent-tree-card\"><b>CLAUDE.md</b><span>이 Agent가 지켜야 할 배경과 규칙</span></div></div><div class=\"agent-tree-branch\"><div class=\"agent-tree-card\"><b>SKILL.md</b><span>업무를 수행하는 순서와 판단 기준</span></div></div></div></div></div></div>";
+SLIDES[3].html = "<div class=\"inner\" style=\"max-width:1160px;\"><div class=\"kicker\">판단 · 3축</div><div class=\"h2\" style=\"font-size:25px;\">Agent로 만들 일인가</div><div class=\"sub\">세 질문에 차례로 답하고, Y일 때만 다음 단계로 넘어갑니다.</div><div class=\"demo\" style=\"margin-top:16px;padding:18px 20px;\"><div class=\"dlbl\">Y / N 판단 흐름</div><div style=\"display:grid;grid-template-columns:1fr 70px 1fr 70px 1fr;gap:8px;align-items:center;\"><div class=\"card bl\" style=\"min-height:150px;text-align:center;\"><div class=\"sn\" style=\"margin:0 auto 10px;\">1</div><div class=\"ctag bl\">반복</div><div class=\"ct\">월 4회 이상?</div><div class=\"cb\">계속 다시 하는 일인가</div></div><div style=\"text-align:center;font-size:13px;font-weight:800;line-height:2;\"><span style=\"color:#6EE7B7;\">Y →</span><br/><span style=\"color:#FCA5A5;\">N ↓</span></div><div class=\"card pu\" style=\"min-height:150px;text-align:center;\"><div class=\"sn\" style=\"margin:0 auto 10px;\">2</div><div class=\"ctag pu\">단계</div><div class=\"ct\">3단계 이상?</div><div class=\"cb\">한 번에 끝나지 않는가</div></div><div style=\"text-align:center;font-size:13px;font-weight:800;line-height:2;\"><span style=\"color:#6EE7B7;\">Y →</span><br/><span style=\"color:#FCA5A5;\">N ↓</span></div><div class=\"card am\" style=\"min-height:150px;text-align:center;\"><div class=\"sn\" style=\"margin:0 auto 10px;background:#D97706;\">3</div><div class=\"ctag am\">기준</div><div class=\"ct\">합격 기준을 쓸 수 있나?</div><div class=\"cb\">잘했는지 확인할 수 있는가</div></div></div><div style=\"display:grid;grid-template-columns:1fr 70px 1fr 70px 1fr;gap:8px;margin-top:12px;text-align:center;font-size:13px;font-weight:800;\"><div style=\"color:#FCA5A5;\">N → <strong style=\"color:#fff;\">일회성 대화</strong></div><div></div><div style=\"color:#FCA5A5;\">N → <strong style=\"color:#fff;\">Skill</strong></div><div></div><div style=\"color:#6EE7B7;\">Y → <strong style=\"color:#fff;\">Agent</strong></div></div></div><div class=\"cl pu\" style=\"margin-top:14px;text-align:center;\"><strong>세 번 모두 Y</strong>일 때만 Agent로 만듭니다.</div></div>";
 SLIDES.forEach(slide => {
   slide.html = slide.html.replaceAll('한 번에 하던 일을<br/><strong style="color:#fff">작성</strong>과 <strong style="color:#fff">확인</strong>으로 나눕니다.', '업무를 수행하는 Agent와 결과를 점검하는 Agent로 나눠 일하게 합니다.');
   slide.html = slide.html.replaceAll('draft.md', 'CLAUDE.md').replaceAll('review.md', '검토 결과').replaceAll('초안', '결과물');
@@ -431,6 +434,22 @@ SLIDES.forEach((s, i) => {
   dot.onclick = () => show(i);
   dotsEl.appendChild(dot);
 });
+
+function fitSlides(){
+  document.querySelectorAll('.slide').forEach(slide => {
+    const inner = slide.querySelector('.inner');
+    if (!inner) return;
+    inner.style.transform = 'none';
+    inner.style.transformOrigin = 'center center';
+    const availableH = slide.clientHeight - 34;
+    const availableW = slide.clientWidth - 86;
+    const rect = inner.getBoundingClientRect();
+    const scale = Math.min(1, availableH / Math.max(rect.height, 1), availableW / Math.max(rect.width, 1));
+    if (scale < 0.995) inner.style.transform = `scale(${scale})`;
+  });
+}
+fitSlides();
+window.addEventListener('resize', fitSlides);
 
 function show(idx){
   idx = Math.max(0, Math.min(SLIDES.length - 1, idx));
