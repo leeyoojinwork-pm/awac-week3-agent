@@ -535,6 +535,7 @@ if (criteriaPosition >= 0) SLIDES.splice(criteriaPosition, 0, {notes:"판단 장
 SLIDES.forEach(slide => {
   slide.html = slide.html
     .replaceAll('Agent로 만들 일인가', '꼭 Agent로 만들어야 하나요?')
+    .replaceAll('SKILL AGENT 복습', '꼭 Agent로 만들어야 하나요?')
     .replaceAll('정리해 주십시오', '정리해줘')
     .replaceAll('draft · review', '결과물 · 검토')
     .replaceAll('대화는 안 넘어가고 파일만 넘어간다', '채팅방 사이에는 파일만 전달됩니다')
