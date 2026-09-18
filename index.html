@@ -397,6 +397,7 @@ SLIDES.forEach(slide => {
   slide.html = slide.html.replaceAll('한 번에 하던 일을<br/><strong style="color:#fff">작성</strong>과 <strong style="color:#fff">확인</strong>으로 나눕니다.', '업무를 수행하는 Agent와 결과를 점검하는 Agent로 나눠 일하게 합니다.');
   slide.html = slide.html.replace('<div class="cl am">새로 쓰지 않습니다. <strong>이걸 긁어옵니다.</strong></div>', '');
   slide.html = slide.html.replaceAll('방 2개 → 검토 결과', '방 2개 → Sub Agent').replaceAll('Sub Agent · CLAUDE.md 기준으로 검토', 'Sub Agent · .claude/agents/에 정의');
+  slide.html = slide.html.replaceAll('<strong>세 번 모두 Y</strong>일 때만 Agent로 만듭니다.', '반복만 있으면 <span class="hl">Skill</span>, 기준이 없으면 <span class="hl">기준 먼저</span>,<br/>한 번만 하는 일이면 <span class="hl">일회성 대화</span>입니다.');
   if (slide.html.includes('파일 이름은 background.md 로 해줘.')) {
     slide.html = slide.html.replace(/<pre class="prompt">[\s\S]*?<\/pre>/, '<pre class="prompt">00. 문제 정의 — 내가 풀려는 문제를 한 문장으로\n01. 직무와 업무 — 내 직무와 하는 일\n02. 업무 순서 — 이 업무가 진행되는 순서\n03. 판단 기준 — 내가 중요하다고 말한 기준\n04. 금지 사항 — 하면 안 된다고 말한 것\n05. 확인 지점 — 사람이 확인해야 하는 곳\n06. 결과물 형태 — 결과물이 어떤 모양이어야 하는지\n07. 개선 사항 — 고치고 싶다고 말한 것\n\n내가 말한 것만 적어. 비어 있는 항목은 비워 두고 추측하지 마.\n파일 이름은 background.md 로 해줘.</pre>');
   }
