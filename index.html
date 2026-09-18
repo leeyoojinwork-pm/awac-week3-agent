@@ -196,6 +196,10 @@ pre.prompt{background:rgba(8,12,20,.85);border:1px solid rgba(124,58,237,.3);bor
 .cover-rule{background:rgba(167,139,250,.28);margin:34px 0 18px;}
 .cover-caption{font-size:19px;color:rgba(255,255,255,.66);}
 .cover-goal{margin-top:42px;color:#E9D5FF;border-left-color:#7C3AED;}
+.agent-char{width:46px;height:46px;object-fit:contain;image-rendering:pixelated;display:block;margin:0 auto 5px;}
+.agent-hierarchy{display:flex;justify-content:center;margin:10px 0 4px;}
+.agent-hierarchy .agent-level{display:flex;align-items:center;gap:10px;color:#C4B5FD;font-weight:800;font-size:13px;}
+.agent-hierarchy .agent-level .agent-char{margin:0;width:38px;height:38px;}
 .ba{grid-template-columns:1fr 1fr;}
 .flow{justify-content:center;}
 .inner{max-width:900px;}
@@ -359,6 +363,14 @@ SLIDES[4].html = SLIDES[4].html.replaceAll('그냥 대화', '일회성 대화');
 SLIDES.splice(3, 1);
 SLIDES[3].html = "<div class=\"inner\" style=\"max-width:1160px;\"><div class=\"kicker\">판단 · 3축</div><div class=\"h2\" style=\"font-size:25px;\">Agent로 만들 일인가</div><div class=\"sub\">세 질문에 차례로 답하면, 만들지 말지가 결정됩니다.</div><div class=\"demo\" style=\"margin-top:15px;padding:18px 20px;\"><div class=\"dlbl\">Y / N 판단 흐름</div><div style=\"display:grid;grid-template-columns:1fr 80px 1fr 80px 1fr;gap:10px;align-items:center;\"><div class=\"card bl\" style=\"min-height:145px;text-align:center;\"><div class=\"sn\" style=\"margin:0 auto 10px;\">1</div><div class=\"ctag bl\">반복</div><div class=\"ct\">월 4회 이상?</div><div class=\"cb\">계속 다시 하는 일인가</div></div><div style=\"display:grid;gap:7px;text-align:center;font-size:12px;font-weight:800;\"><span style=\"color:#6EE7B7;\">Y →</span><span style=\"color:#FCA5A5;\">N ↓</span></div><div class=\"card pu\" style=\"min-height:145px;text-align:center;\"><div class=\"sn\" style=\"margin:0 auto 10px;\">2</div><div class=\"ctag pu\">단계</div><div class=\"ct\">3단계 이상?</div><div class=\"cb\">한 번에 끝나지 않는가</div></div><div style=\"display:grid;gap:7px;text-align:center;font-size:12px;font-weight:800;\"><span style=\"color:#6EE7B7;\">Y →</span><span style=\"color:#FCA5A5;\">N ↓</span></div><div class=\"card am\" style=\"min-height:145px;text-align:center;\"><div class=\"sn\" style=\"margin:0 auto 10px;background:#D97706;\">3</div><div class=\"ctag am\">기준</div><div class=\"ct\">합격 기준을 쓸 수 있나?</div><div class=\"cb\">잘했는지 확인할 수 있는가</div></div></div><div style=\"display:grid;grid-template-columns:1fr 80px 1fr 80px 1fr;gap:10px;margin-top:10px;text-align:center;font-size:12px;font-weight:800;\"><div style=\"color:#FCA5A5;\">N → <strong style=\"color:#fff;\">일회성 대화</strong></div><div></div><div style=\"color:#FCA5A5;\">N → <strong style=\"color:#fff;\">Skill</strong></div><div></div><div style=\"color:#6EE7B7;\">Y → <strong style=\"color:#fff;\">Agent</strong></div></div></div><div class=\"cl pu\" style=\"margin-top:14px;\"><strong>세 번 모두 Y</strong>일 때만 Agent로 만듭니다. 중간에 N이 나오면 그 단계에서 멈춥니다.</div></div>";
 SLIDES[3].html = "<div class=\"inner\" style=\"max-width:1080px;\"><div class=\"divslide\" style=\"min-height:420px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;\"><div class=\"kicker\" style=\"font-size:13px;\">개념 · Agent</div><div style=\"font-size:clamp(42px,6vw,76px);font-weight:900;letter-spacing:-.06em;line-height:1.08;color:#fff;margin:20px 0 24px;\">그래서,<br/><span style=\"color:#A78BFA;\">Agent 개념이 뭔데?</span></div><div style=\"height:2px;width:72px;background:#7C3AED;margin-bottom:24px;\"></div><div style=\"font-size:20px;line-height:1.7;color:rgba(255,255,255,.68);\">반복되는 업무를<br/><strong style=\"color:#fff;\">정해진 순서와 기준으로 수행하는 AI 역할</strong>입니다.</div></div></div>";
+SLIDES.forEach(slide => {
+  if (slide.html.includes('방 하나에서 처리합니다')) {
+    slide.html = slide.html.replace('<div style=\"margin-top:18px;display:flex;', '<div class=\"agent-hierarchy\"><div class=\"agent-level\"><img class=\"agent-char\" src=\"assets/claude-character.png\" alt=\"Agent 캐릭터\"><span>Single Agent · 채팅방 1개</span></div></div><div style=\"margin-top:18px;display:flex;');
+  }
+  if (slide.html.includes('담당마다 방을 나눕니다')) {
+    slide.html = slide.html.replace('<div style=\"margin-top:18px;\"><div style=\"display:flex;', '<div class=\"agent-hierarchy\"><div class=\"agent-level\"><img class=\"agent-char\" src=\"assets/claude-character.png\" alt=\"Sub Agent 캐릭터\"><span>Sub Agent · CLAUDE.md 기준으로 검토</span></div></div><div style=\"margin-top:18px;\"><div style=\"display:flex;');
+  }
+});
 SLIDES.forEach(slide => {
   slide.html = slide.html.replaceAll('draft.md', 'CLAUDE.md').replaceAll('review.md', '검토 결과').replaceAll('초안', '결과물');
   slide.notes = slide.notes.replaceAll('draft.md', 'CLAUDE.md').replaceAll('review.md', '검토 결과').replaceAll('초안', '결과물');
