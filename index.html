@@ -751,13 +751,11 @@ const finalAgentExecution = SLIDES.find(slide => slide.html.includes('Agent는 �
 const firstNewsCase = SLIDES.find(slide => slide.html.includes('머릿속 기준을 글로 꺼냈더니'));
 const backgroundSaveSlide = SLIDES.find(slide => slide.html.includes('background.md로 저장합니다'));
 const backgroundContentSlide = SLIDES.find(slide => slide.html.includes('background.md에는 이런 내용이 담깁니다'));
-const agentBuildPages = [
-  slide => slide.html.includes('일하는 순서를 다섯 칸으로'),
-  slide => slide.html.includes('다섯 칸은 AI가 채웁니다'),
-  slide => slide.html.includes('AI가 쓰고, 나는 고칩니다'),
-  slide => slide.html.includes('한 번 돌립니다 → 결과물.md'),
-  slide => slide.html.includes('Agent 하나 완성')
-].map(predicate => SLIDES.find(predicate)).filter(Boolean);
+for (let i = SLIDES.length - 1; i >= 0; i--) {
+  if (SLIDES[i].html.includes('일하는 순서를 다섯 칸으로') || SLIDES[i].html.includes('다섯 칸은 AI가 채웁니다')) {
+    SLIDES.splice(i, 1);
+  }
+}
 const backgroundExampleSlide = SLIDES.find(slide => slide.html.includes('background.md — Agent가 알아야 할 8가지'));
 if (backgroundExampleSlide) backgroundExampleSlide.html = `<div class="inner" style="max-width:1120px;">
   <div class="kicker">준비 ① 산출물 · 사례</div>
@@ -837,6 +835,40 @@ const finalBackgroundContent = backgroundExampleSlide || SLIDES.find(slide => sl
 if (finalBackgroundSave) finalBackgroundSave.html = finalBackgroundSave.html.replace('background.md로 <strong>저장합니다.</strong> 이 파일로 바로 Agent를 만듭니다.', 'background.md로 <strong>저장한 뒤, 새 채팅방에 넣습니다.</strong> 여기서 Agent를 시작합니다.');
 const finalPromptSlide = SLIDES.find(slide => slide.html.includes('AI가 쓰고, 나는 고칩니다'));
 if (finalPromptSlide) finalPromptSlide.html = finalPromptSlide.html.replace('다 써준 다음, 내가 꼭 봐야 할 줄 3개만 골라서 알려줘.', '다 써준 다음, 이 업무에 필요한 Agent를 나누고 각 Agent가 사용할 Skill을 목록으로 알려줘.');
+const promptForIa = finalPromptSlide;
+let agentSkillIa = SLIDES.find(slide => slide.html.includes('Agent별 Skill 연결 구조'));
+if (promptForIa && !agentSkillIa) {
+  agentSkillIa = {
+    notes: 'Agent별 담당 업무와 연결된 Skill을 IA 형태로 보여주는 페이지입니다.',
+    html: `<div class="inner" style="max-width:1020px;">
+  <div class="kicker">AGENT 만들기 · 연결 구조</div>
+  <div class="h2" style="font-size:25px;">Agent별로 필요한 Skill을 연결합니다</div>
+  <div class="sub">업무를 담당별로 나누고, 각 Agent가 반복해서 쓰는 Skill을 붙입니다.</div>
+  <div class="demo" style="margin-top:20px;padding:20px 24px;">
+    <div class="dlbl">Agent별 Skill 연결 구조 · IA</div>
+    <div style="background:rgba(0,0,0,.24);border-radius:9px;padding:18px 20px;font-family:var(--mono,monospace);">
+      <div style="font-size:18px;font-weight:900;color:#fff;">취업 준비 Agent</div>
+      <div style="margin-top:12px;color:#C4B5FD;font-size:15px;line-height:1.9;">
+        <div>├── 이력서 Agent <span style="color:rgba(255,255,255,.5);">채용 공고에 맞춰 작성</span></div>
+        <div style="padding-left:22px;color:#6EE7B7;">├── Skill 1 · JD 분석</div>
+        <div style="padding-left:22px;color:#6EE7B7;">└── Skill 2 · 이력서 맞춤</div>
+        <div style="margin-top:4px;">└── 면접 Agent <span style="color:rgba(255,255,255,.5);">완성된 이력서를 검토</span></div>
+        <div style="padding-left:22px;color:#6EE7B7;">├── Skill 3 · 예상질문</div>
+        <div style="padding-left:22px;color:#6EE7B7;">└── Skill 4 · 답변 다듬기</div>
+      </div>
+    </div>
+  </div>
+  <div class="bigmsg"><div class="bmlbl">IA를 읽는 법</div><div class="bmtxt">Agent는 <span class="hl">담당자</span>이고,<br/>Skill은 그 담당자가 반복해서 쓰는 <strong>업무 방법</strong>입니다.</div></div>
+</div>`
+  };
+  SLIDES.splice(SLIDES.indexOf(promptForIa) + 1, 0, agentSkillIa);
+}
+const agentBuildPages = [
+  slide => slide.html.includes('AI가 쓰고, 나는 고칩니다'),
+  slide => slide.html.includes('Agent별 Skill 연결 구조'),
+  slide => slide.html.includes('한 번 돌립니다 → 결과물.md'),
+  slide => slide.html.includes('Agent 하나 완성')
+].map(predicate => SLIDES.find(predicate)).filter(Boolean);
 if (finalBackgroundSave && finalBackgroundContent) {
   const backgroundSequence = finalFolderIntro
     ? [finalBackgroundSave, finalFolderIntro, finalBackgroundContent]
@@ -857,7 +889,7 @@ if (finalSkillRange && finalAgentExecution) {
   finalAgentExecution.html = finalAgentExecution.html.replaceAll('class="agbox"', 'class="agbox execution-step"');
   SLIDES.splice(SLIDES.indexOf(finalSkillRange) + 1, 0, finalAgentExecution);
 }
-if (firstNewsCase && agentBuildPages.length === 5 && finalAgentBumper) {
+if (firstNewsCase && agentBuildPages.length === 4 && finalAgentBumper) {
   const pagesToMove = [finalAgentBumper, ...agentBuildPages];
   pagesToMove.forEach(slide => SLIDES.splice(SLIDES.indexOf(slide), 1));
   const newsIndex = SLIDES.indexOf(firstNewsCase);
