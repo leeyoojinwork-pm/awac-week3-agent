@@ -187,6 +187,52 @@ pre.prompt{background:rgba(8,12,20,.85);border:1px solid rgba(124,58,237,.3);bor
 .case-strip{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
 .case-chip{border-radius:99px;padding:5px 10px;font-size:11px;font-weight:700;color:#E9D5FF;background:rgba(124,58,237,.18);border:1px solid rgba(167,139,250,.32);}
 @media(max-width:760px){.cover-structured{grid-template-columns:1fr}.cover-main{min-height:390px;padding:28px 24px}.cover-side{padding:18px}.cover-title{font-size:58px}.slide{padding:22px 42px}.g2,.g3,.ba{grid-template-columns:1fr!important}}
+/* ── 전체 덱 화이트 테마 ── */
+body{background:#f6f8fb;color:#182235;}
+.topbar{background:rgba(255,255,255,.96);border-bottom-color:#dce2eb;}
+.tb-title{color:#334155;}.tb-meta,.counter{color:#64748b;}
+.tb-btn{border-color:#cbd5e1;color:#64748b;}.tb-btn:hover{background:#eef2f7;color:#182235;border-color:#94a3b8;}
+.dot{background:#cbd5e1;}.dot.on{background:#7c3aed;}
+.progress{background:#e2e8f0;}
+.arr{background:rgba(255,255,255,.9);border-color:#cbd5e1;color:#64748b;box-shadow:0 4px 16px rgba(15,23,42,.08);}
+.arr:hover{background:#fff;color:#334155;}
+.notes{background:rgba(255,255,255,.97);border-top-color:#dce2eb;color:#64748b;}
+.nlbl,.kicker{color:#6d28d9;}
+.h1,.h2,.ct,.ct strong,.batask,.st strong,.bmtxt,.cover-title,.cover-node strong,.agent-tree-root,.agent-tree-root span{color:#111827;}
+.sub,.cb,.babody,.st,.farr,.cover-caption,.cover-node span,.cover-side-label,.agent-tree,.agent-tree-card span{color:#5b6475;}
+.card{box-shadow:0 1px 2px rgba(15,23,42,.03);}
+.card.pu{background:#f1edff;border-color:#c4b5fd;}.card.bl{background:#eef5ff;border-color:#a8c7f8;}.card.rd{background:#fff1f2;border-color:#f5b4bc;}.card.am{background:#fff8e8;border-color:#f2cd76;}.card.gr{background:#ecfdf5;border-color:#9ddfc3;}.card.sl{background:#fff;border-color:#d7dee8;}
+.ctag.pu{color:#6d28d9;}.ctag.bl{color:#2563eb;}.ctag.rd{color:#be123c;}.ctag.am{color:#a16207;}.ctag.gr{color:#047857;}.ctag.sl{color:#64748b;}
+.bef{background:#fff1f2;border-color:#f5b4bc;}.aft{background:#f1edff;border-color:#c4b5fd;}.balbl.b{color:#be123c;}.balbl.a{color:#6d28d9;}
+.cl.pu{background:#f1edff;border-left-color:#7c3aed;color:#5b21b6;}.cl.bl{background:#eef5ff;border-left-color:#2563eb;color:#1d4ed8;}.cl.am{background:#fff8e8;border-left-color:#d97706;color:#92400e;}.cl.gr{background:#ecfdf5;border-left-color:#059669;color:#047857;}
+.step{background:#fff;border-color:#d7dee8;}.st{color:#475569;}.sn{color:#fff;}
+.rtag{background:#f1edff;border-color:#c4b5fd;color:#6d28d9;}.skill{background:#eef5ff;border-color:#a8c7f8;color:#2563eb;}
+.fnode,.agent-tree-card{background:#fff;border-color:#d7dee8;}.farr{color:#64748b;}
+.tbl thead th{background:#eef2f7;color:#64748b;}.tbl td{color:#475569;border-bottom-color:#e2e8f0;}
+.bigmsg{background:linear-gradient(135deg,#f1edff,#eef5ff);border-color:#b8a4f5;}.bmlbl{color:#64748b;}.bmtxt .hl{color:#6d28d9;}
+.tbadge,.pill{background:#f1edff;border-color:#c4b5fd;color:#6d28d9;}
+pre.prompt{background:#fff;border-color:#c4b5fd;border-left-color:#7c3aed;color:#334155;}
+.copybtn{color:#6d28d9;background:#f1edff;border-color:#c4b5fd;}.copybtn:hover{background:#e9ddff;color:#4c1d95;}
+.term{background:#fff;border-color:#d7dee8;}.term .tt{color:#6d28d9;background:#f1edff;}.term .tb{color:#64748b;}.term .tb b{color:#1f2937;}
+.divslide{background:linear-gradient(135deg,#eee9ff 0%,#eef4ff 55%,#f7f8fb 100%);border-color:#b8a4f5;box-shadow:0 0 70px rgba(124,58,237,.08) inset;}
+.divslide .kicker{color:#6d28d9;}.divslide .h2{color:#111827;}
+.cover-main,.cover-side{border-color:#d7c9ff;background:#fff;box-shadow:0 18px 60px rgba(15,23,42,.06);}.cover-side{background:#fff;}
+.cover-eyebrow{color:#6d28d9;}.cover-title .accent,.cover-arrow{color:#7c3aed;}.cover-rule{background:#d7c9ff;}.cover-caption{color:#5b6475;}.cover-goal{color:#5b21b6;}
+.cover-side-label{color:#64748b;}.cover-node{border-color:#d7dee8;background:#f8fafc;}.case-chip{color:#6d28d9;background:#f1edff;border-color:#c4b5fd;}
+.agent-tree-root{border-color:#b8a4f5;background:#f1edff;}.agent-tree-stem,.agent-tree-branches::before,.agent-tree-branch::before{background:#b8a4f5;}.agent-tree-card b{color:#6d28d9;}
+.qa-node b,.qa-branch span,.qa-check span{color:#111827;}.qa-node{background:#f1edff!important;}.qa-check{background:#eef5ff!important;border-color:#a8c7f8!important;}.qa-branch{background:#fff8e8!important;border-color:#e7c46b!important;}.qa-branch.pass{background:#ecfdf5!important;border-color:#9ddfc3!important;}.qa-check small,.qa-branch small,.qa-node span{color:#64748b;}
+/* inline dark-theme declarations in legacy slide snippets */
+.inner,.inner p,.inner div,.inner span,.inner strong,.inner small{color:#1f2937;}
+.inner .sub,.inner .cb,.inner .st,.inner .babody,.inner .cover-caption,.inner .cover-node span,.inner .cover-side-label,.inner .agent-tree,.inner .agent-tree-card span,.inner .bmlbl,.inner .qa-check small,.inner .qa-branch small,.inner .qa-node span{color:#334155!important;}
+.inner [style*="color:rgba(255,255,255"]{color:#334155!important;}
+.inner [style*="color:#fff"],.inner [style*="color: #fff"]{color:#111827!important;}
+.inner [style*="background:rgba(255,255,255"]{background:#fff!important;border-color:#d7dee8!important;}
+.inner [style*="border-color:rgba(255,255,255"]{border-color:#d7dee8!important;}
+.inner .kicker,.inner .ctag.pu,.inner .ctag.bl,.inner .ctag.rd,.inner .ctag.am,.inner .ctag.gr,.inner .ctag.sl,.inner .hl,.inner .accent,.inner .cover-title .accent,.inner .cover-arrow{color:inherit;}
+.inner .kicker{color:#6d28d9!important;}.inner .ctag.pu{color:#6d28d9!important;}.inner .ctag.bl{color:#2563eb!important;}.inner .ctag.rd{color:#be123c!important;}.inner .ctag.am{color:#a16207!important;}.inner .ctag.gr{color:#047857!important;}.inner .ctag.sl{color:#64748b!important;}.inner .hl,.inner .accent,.inner .cover-title .accent,.inner .cover-arrow{color:#6d28d9!important;}
+/* 최종 가독성 규칙: 덱 안의 모든 글자는 검은색 계열 */
+body,body *{color:#111827!important;}
+.tb-badge{background:#ede9fe!important;}.sn{background:#c4b5fd!important;}.pfill{background:#7c3aed!important;}
 /* 표지: 기존 프레임을 유지하고 보라색만 적용 */
 .cover-structured{display:block;max-width:1280px;margin:0 auto;}
 .cover-main{border:0;border-radius:0;background:none;box-shadow:none;padding:10px 4px 0;min-height:0;display:block;}
@@ -309,6 +355,29 @@ pre.prompt{background:rgba(8,12,20,.85);border:1px solid rgba(124,58,237,.3);bor
 .skill-file-label::before{content:'';display:inline-block;width:16px;height:20px;border:2px solid #93C5FD;border-radius:3px;background:linear-gradient(135deg,transparent 0 55%,rgba(147,197,253,.25) 56% 100%);box-shadow:inset 0 -5px 0 rgba(147,197,253,.12);}
 .agent-file-label{display:flex;align-items:center;gap:9px;}
 .agent-file-label .agent-char{width:28px;height:28px;margin:0;}
+.qa-flow{display:flex;flex-direction:column;align-items:center;gap:0;padding:8px 10px 4px;}
+.qa-node{border:2px solid rgba(167,139,250,.7);border-radius:9px;background:rgba(124,58,237,.13);padding:10px 18px;text-align:center;min-width:190px;}
+.qa-node b{display:block;color:#fff;font-size:15px;line-height:1.3;}
+.qa-node span{display:block;color:rgba(255,255,255,.58);font-size:11px;margin-top:4px;line-height:1.35;}
+.qa-line-v{width:2px;height:22px;background:#A78BFA;position:relative;}
+.qa-line-v::after{content:'▼';position:absolute;left:50%;bottom:-11px;transform:translateX(-50%);color:#A78BFA;font-size:13px;}
+.qa-checks{width:100%;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;position:relative;margin:14px 0 18px;}
+.qa-checks::before{content:'';position:absolute;top:-14px;left:12%;right:12%;height:2px;background:rgba(167,139,250,.8);}
+.qa-check{border:1px solid rgba(147,197,253,.45);border-radius:8px;background:rgba(30,64,175,.16);padding:11px 8px;text-align:center;position:relative;}
+.qa-check::before{content:'';position:absolute;top:-14px;left:50%;width:2px;height:14px;background:rgba(167,139,250,.8);}
+.qa-check b{display:block;color:#C4B5FD;font-size:12px;}
+.qa-check span{display:block;color:#fff;font-size:13px;font-weight:800;margin-top:4px;}
+.qa-check small{display:block;color:rgba(255,255,255,.55);font-size:10px;margin-top:4px;line-height:1.3;}
+.qa-branches{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:16px;position:relative;margin:14px 0 10px;padding-top:16px;}
+.qa-branches::before{content:'';position:absolute;top:0;left:25%;right:25%;height:2px;background:rgba(167,139,250,.8);}
+.qa-branch{position:relative;border:1px solid rgba(252,211,77,.5);border-radius:8px;background:rgba(120,53,15,.18);padding:12px;text-align:center;}
+.qa-branch::before{content:'';position:absolute;top:-16px;left:50%;width:2px;height:16px;background:rgba(167,139,250,.8);}
+.qa-branch.pass{border-color:rgba(110,231,183,.5);background:rgba(6,78,59,.2);}
+.qa-branch b{display:block;color:#FCD34D;font-size:12px;}
+.qa-branch.pass b{color:#6EE7B7;}
+.qa-branch span{display:block;color:#fff;font-size:14px;font-weight:800;margin-top:4px;}
+.qa-branch small{display:block;color:rgba(255,255,255,.55);font-size:10px;margin-top:4px;}
+@media(max-width:760px){.qa-checks{grid-template-columns:1fr 1fr;}.qa-checks::before{display:none;}.qa-check::before{display:none;}.qa-branches{grid-template-columns:1fr;}.qa-branches::before{display:none;}.qa-branch::before{display:none;}}
 .bg-continue-row{display:grid;grid-template-columns:80px 1fr;align-items:baseline;gap:14px;padding:7px 0;color:#A78BFA;font-size:14px;font-weight:900;}
 .bg-continue-row span{color:rgba(255,255,255,.62);font-size:13px;font-weight:600;}
 @media(max-width:760px){.skill-agent-compare{grid-template-columns:1fr;}.skill-agent-half.skill-side{border-right:0;border-bottom:1px solid rgba(167,139,250,.25);}}
@@ -759,6 +828,9 @@ for (let i = SLIDES.length - 1; i >= 0; i--) {
 for (let i = SLIDES.length - 1; i >= 0; i--) {
   if (SLIDES[i].html.includes('AI는 이제 답변을 넘어, 업무를 직접 수행합니다')) SLIDES.splice(i, 1);
 }
+for (let i = SLIDES.length - 1; i >= 0; i--) {
+  if (SLIDES[i].html.includes('순차 · 병렬 · 분기 · 반복') || SLIDES[i].html.includes('(Workflow)')) SLIDES.splice(i, 1);
+}
 const finalAgentVsChat = SLIDES.find(slide => slide.html.includes('AI는 이제 답변을 넘어, 업무를 직접 수행합니다'));
 const finalAgentExecution = SLIDES.find(slide => slide.html.includes('Agent는 네 단계를 순서대로 실행합니다'));
 const firstNewsCase = SLIDES.find(slide => slide.html.includes('머릿속 기준을 글로 꺼냈더니'));
@@ -1001,7 +1073,59 @@ if (finalReviewOutputSlide && !SLIDES.some(slide => slide.html.includes('검수 
   <div class="bigmsg"><div class="bmlbl">사람 검수 포인트</div><div class="bmtxt"><span class="hl">사실관계 · 톤 · 최종 판단</span>은 사람이 확인하고<br/>통과한 결과물만 최종 제출합니다.</div></div>
 </div>`
   };
+  finalOutputAgentSlide.html = `<div class="inner" style="max-width:1120px;">
+  <div class="kicker">최종 산출물 · 검수 Agent</div>
+  <div class="h2" style="font-size:25px;">검수 Agent가 최종 산출물을 확인합니다</div>
+  <div class="sub">네 가지 기준을 선으로 따라가며 확인하고, 사람이 마지막에 사실관계와 톤을 봅니다.</div>
+  <div class="demo" style="margin-top:18px;padding:16px 20px 14px;">
+    <div class="dlbl">검수 Agent · 최종 제출 FLOW</div>
+    <div class="qa-flow">
+      <div class="qa-node"><b>결과물.md</b><span>작성 Agent가 만든 초안</span></div>
+      <div class="qa-line-v"></div>
+      <div class="qa-checks">
+        <div class="qa-check"><b>01</b><span>근거 확인</span><small>말하지 않은 내용은 없는가</small></div>
+        <div class="qa-check"><b>02</b><span>누락 확인</span><small>담당자·기한이 빠지지 않았나</small></div>
+        <div class="qa-check"><b>03</b><span>형식 확인</span><small>정해둔 모양과 위치인가</small></div>
+        <div class="qa-check"><b>04</b><span>금지 확인</span><small>추측·과장이 섞이지 않았나</small></div>
+      </div>
+      <div class="qa-line-v"></div>
+      <div class="qa-branches">
+        <div class="qa-branch"><b>판정 애매</b><span>보류 큐 · 재확인 대기</span><small>사람에게 질문하고 다시 확인</small></div>
+        <div class="qa-branch pass"><b>판정 통과</b><span>초안 생성</span><small>사람 검수 단계로 이동</small></div>
+      </div>
+      <div class="qa-line-v"></div>
+      <div class="qa-node" style="border-color:rgba(252,211,77,.65);background:rgba(120,53,15,.18);"><b>사람 검수</b><span>사실관계 · 톤 · 최종 판단</span></div>
+      <div class="qa-line-v"></div>
+      <div class="qa-node" style="border-color:rgba(110,231,183,.65);background:rgba(6,78,59,.2);"><b>최종 제출</b><span>통과한 결과물만 제출</span></div>
+    </div>
+  </div>
+</div>`;
   SLIDES.splice(SLIDES.indexOf(finalReviewOutputSlide) + 1, 0, finalOutputAgentSlide);
+  const finalAdoptionSlide = {
+    notes: '마지막 실험 장표입니다. 지난번 HTML 결과물을 input으로 넣고, 오늘 만든 Agent들을 실제로 돌려 도입 가능한지 확인합니다.',
+    html: `<div class="inner" style="max-width:1120px;">
+  <div class="kicker">최종 실험 · 도입 확인</div>
+  <div class="h2" style="font-size:25px;">지난번 HTML 결과물에 Agent를 돌려봅니다</div>
+  <div class="sub">오늘 만든 Agent가 이미 만든 결과물에도 적용되는지 실제 파일로 확인합니다.</div>
+  <div class="demo" style="margin-top:18px;padding:18px 20px;">
+    <div class="dlbl">이전 결과물 → Agent 실행 → 도입 판단</div>
+    <div style="display:grid;grid-template-columns:1.15fr 28px 1fr 28px 1.15fr;gap:8px;align-items:center;">
+      <div class="card bl" style="min-height:142px;text-align:center;padding:16px 12px;"><div class="ctag bl">INPUT</div><div class="ct">지난번 HTML 결과물</div><div class="cb">기존에 만든 파일을 그대로 넣습니다.<br/><span class="rtag">input/기존-결과물.html</span></div></div>
+      <div style="text-align:center;color:#A78BFA;font-size:24px;">→</div>
+      <div class="card pu" style="min-height:142px;text-align:center;padding:16px 12px;"><div class="ctag pu">AGENT RUN</div><div class="ct">만든 Agent들을 실행</div><div class="cb">각 Skill 순서대로 처리하고<br/>검수 기준까지 확인합니다.</div></div>
+      <div style="text-align:center;color:#A78BFA;font-size:24px;">→</div>
+      <div class="card gr" style="min-height:142px;text-align:center;padding:16px 12px;"><div class="ctag gr">OUTPUT</div><div class="ct">도입 여부 판단</div><div class="cb">그대로 쓸지, 고칠지,<br/>새 Agent가 필요한지 결정합니다.</div></div>
+    </div>
+  </div>
+  <div class="g3" style="margin-top:14px;">
+    <div class="card bl"><div class="ctag bl">01 · 실행</div><div class="ct">실제로 결과가 나오는가</div><div class="cb">SKILL.md 순서대로 파일을 읽고 결과를 냅니다.</div></div>
+    <div class="card am"><div class="ctag am">02 · 비교</div><div class="ct">기존 결과보다 나아졌나</div><div class="cb">누락·근거·형식 기준으로 이전 결과와 비교합니다.</div></div>
+    <div class="card gr"><div class="ctag gr">03 · 결정</div><div class="ct">도입할 수 있는가</div><div class="cb">사람이 최종 판단하고 다음 업무에 적용합니다.</div></div>
+  </div>
+  <div class="bigmsg"><div class="bmlbl">최종 확인</div><div class="bmtxt">만들었다고 끝이 아니라,<br/><span class="hl">지난 결과물에 직접 돌려봐야</span> Agent가 완성됩니다.</div></div>
+</div>`
+  };
+  SLIDES.push(finalAdoptionSlide);
 }
 if (backgroundSaveSlide && backgroundContentSlide) {
   const backgroundOrderIndex = Math.min(SLIDES.indexOf(backgroundSaveSlide), SLIDES.indexOf(backgroundContentSlide));
