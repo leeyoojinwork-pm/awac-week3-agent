@@ -750,6 +750,8 @@ const finalSkillRange = SLIDES.find(slide => slide.html.includes('A. 아닙니�
 const finalAgentVsChat = SLIDES.find(slide => slide.html.includes('AI는 이제 답변을 넘어, 업무를 직접 수행합니다'));
 const finalAgentExecution = SLIDES.find(slide => slide.html.includes('Agent는 네 단계를 순서대로 실행합니다'));
 const firstNewsCase = SLIDES.find(slide => slide.html.includes('머릿속 기준을 글로 꺼냈더니'));
+const backgroundSaveSlide = SLIDES.find(slide => slide.html.includes('background.md로 저장합니다'));
+const backgroundContentSlide = SLIDES.find(slide => slide.html.includes('background.md에는 이런 내용이 담깁니다'));
 const agentBuildPages = [
   slide => slide.html.includes('일하는 순서를 다섯 칸으로'),
   slide => slide.html.includes('다섯 칸은 AI가 채웁니다'),
@@ -826,6 +828,18 @@ if (newsCaseForFolderIntro && !SLIDES.some(slide => slide.html.includes('Agent�
   };
   SLIDES.splice(SLIDES.indexOf(newsCaseForFolderIntro), 0, folderIntro);
 }
+const finalBackgroundSave = SLIDES.find(slide => slide.html.includes('background.md로 저장합니다'));
+const finalFolderIntro = SLIDES.find(slide => slide.html.includes('Agent가 먼저 나누는 업무 폴더'));
+const finalBackgroundContent = backgroundExampleSlide || SLIDES.find(slide => slide.html.includes('background.md에는 이런 내용이 담깁니다'));
+if (finalBackgroundSave && finalFolderIntro && finalBackgroundContent) {
+  const backgroundSequenceIndex = Math.min(
+    SLIDES.indexOf(finalBackgroundSave),
+    SLIDES.indexOf(finalFolderIntro),
+    SLIDES.indexOf(finalBackgroundContent)
+  );
+  [finalBackgroundSave, finalFolderIntro, finalBackgroundContent].forEach(slide => SLIDES.splice(SLIDES.indexOf(slide), 1));
+  SLIDES.splice(backgroundSequenceIndex, 0, finalBackgroundSave, finalFolderIntro, finalBackgroundContent);
+}
 if (finalAgentBumper) {
   finalAgentBumper.html = finalAgentBumper.html.replace('>03</div>', '>02</div>');
   if (finalSkillRange && finalAgentVsChat) {
@@ -843,6 +857,12 @@ if (firstNewsCase && agentBuildPages.length === 5 && finalAgentBumper) {
   pagesToMove.forEach(slide => SLIDES.splice(SLIDES.indexOf(slide), 1));
   const newsIndex = SLIDES.indexOf(firstNewsCase);
   pagesToMove.forEach((slide, offset) => SLIDES.splice(newsIndex + offset, 0, slide));
+}
+if (backgroundSaveSlide && backgroundContentSlide) {
+  const backgroundOrderIndex = Math.min(SLIDES.indexOf(backgroundSaveSlide), SLIDES.indexOf(backgroundContentSlide));
+  SLIDES.splice(SLIDES.indexOf(backgroundSaveSlide), 1);
+  SLIDES.splice(SLIDES.indexOf(backgroundContentSlide), 1);
+  SLIDES.splice(backgroundOrderIndex, 0, backgroundSaveSlide, backgroundContentSlide);
 }
 if (finalMultiBumper) finalMultiBumper.html = finalMultiBumper.html.replace('>04</div>', '>03</div>');
 
