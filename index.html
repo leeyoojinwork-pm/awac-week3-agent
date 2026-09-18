@@ -240,6 +240,10 @@ pre.prompt{background:rgba(8,12,20,.85);border:1px solid rgba(124,58,237,.3);bor
 .slide.active .output-resume{animation-delay:2.7s;}
 .slide.active .output-review{animation-delay:3.5s;}
 @keyframes outputIn{to{opacity:1;transform:translateY(0);}}
+.output-file{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid rgba(167,139,250,.35);border-radius:8px;background:rgba(15,23,42,.8);color:rgba(255,255,255,.65);}
+.output-file .output-mark{display:grid;place-items:center;width:24px;height:24px;border-radius:6px;background:#7C3AED;color:#fff;font-weight:900;font-size:14px;}
+.output-file small{display:block;color:rgba(255,255,255,.42);font-size:10px;letter-spacing:.06em;text-transform:uppercase;}
+.output-file strong{display:block;color:#fff;font-size:13px;margin-top:2px;}
 @media (prefers-reduced-motion:reduce){.delayed-output{opacity:1;transform:none;}.slide.active .delayed-output{animation:none;}}
 .slide{overflow:hidden!important;}
 .slide>.inner{overflow:visible;}
@@ -248,6 +252,28 @@ pre.prompt{background:rgba(8,12,20,.85);border:1px solid rgba(124,58,237,.3);bor
 .inner{max-width:900px;}
 .tbl td strong{color:#fff;}
 .cl strong{color:#fff;}
+.presentation-flow{display:grid!important;grid-template-columns:repeat(4,1fr)!important;gap:14px!important;align-items:stretch!important;}
+.presentation-flow>.card{min-height:130px!important;display:flex;flex-direction:column;justify-content:center;padding:10px 16px!important;background:transparent!important;border:0!important;border-top:2px solid rgba(167,139,250,.35)!important;border-radius:0!important;}
+.presentation-flow>.card:nth-child(1){border-top-color:#60A5FA!important;}
+.presentation-flow>.card:nth-child(3){border-top-color:#A78BFA!important;}
+.presentation-flow>.card:nth-child(5){border-top-color:#6EE7B7!important;}
+.presentation-flow>.card:nth-child(7){border-top-color:#F59E0B!important;}
+.presentation-flow>.card .sn{margin:0 0 18px!important;width:38px;height:38px;font-size:16px;}
+.presentation-flow>.card .ct{font-size:17px;line-height:1.35;}
+.presentation-flow>.card .cb{font-size:12px;margin-top:9px;line-height:1.45;}
+.presentation-flow>.presentation-arrow{align-self:center;text-align:center;color:#A78BFA;font-size:26px;}
+@media(max-width:760px){.presentation-flow{grid-template-columns:1fr 1fr!important;}.presentation-flow>.presentation-arrow{display:none;}}
+.split-ai{display:grid;grid-template-columns:1fr 70px 1fr;align-items:stretch;gap:14px;}
+.split-ai-panel{padding:30px 28px;border-radius:18px;min-height:235px;display:flex;flex-direction:column;justify-content:center;}
+.chatbot-panel{background:linear-gradient(145deg,rgba(30,41,59,.95),rgba(69,10,10,.7));border:1px solid rgba(248,113,113,.45);}
+.agent-panel{background:linear-gradient(145deg,rgba(13,148,136,.28),rgba(49,46,129,.72));border:1px solid rgba(94,234,212,.5);}
+.split-ai-label{font-size:13px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#FCA5A5;}
+.agent-panel .split-ai-label{color:#6EE7B7;}
+.split-ai-title{font-size:28px;font-weight:900;color:#fff;margin-top:12px;}
+.split-ai-flow{font-size:17px;font-weight:800;color:#E2E8F0;margin-top:24px;}
+.split-ai-note{font-size:13px;line-height:1.6;color:rgba(255,255,255,.58);margin-top:12px;}
+.split-ai-arrow{align-self:center;text-align:center;color:#A78BFA;font-size:46px;font-weight:300;}
+@media(max-width:760px){.split-ai{grid-template-columns:1fr;}.split-ai-arrow{transform:rotate(90deg);}.split-ai-panel{min-height:180px;}}
 
 html,body{font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Segoe UI",sans-serif;}
 
@@ -516,6 +542,10 @@ SLIDES.forEach(slide => {
     .replaceAll('이렇게 나눕니다', '업무를 이렇게 나눕니다')
     .replaceAll('폴더 — AI가 만든 파일들', 'Agent 작업 폴더')
     .replaceAll('1번 채팅방이 이 폴더를 봅니다', '1번 채팅방이 이 폴더에서 작업합니다')
+    .replaceAll('style="display:grid;grid-template-columns:1fr 28px 1fr 28px 1fr 28px 1fr;gap:7px;align-items:stretch;"', 'class="presentation-flow"')
+    .replaceAll('style="align-self:center;text-align:center;color:#A78BFA;font-size:22px;"', 'class="presentation-arrow"')
+    .replaceAll('<div class="cl bl delayed-output output-resume" style="margin-top:10px;font-size:12px;">출력: <strong>CLAUDE.md</strong></div>', '<div class="output-file delayed-output output-resume" style="margin-top:10px;"><span class="output-mark">↳</span><span><small>결과 파일</small><strong>CLAUDE.md</strong></span></div>')
+    .replaceAll('<div class="cl pu delayed-output output-review" style="margin-top:10px;font-size:12px;">출력: <strong>검토 결과</strong></div>', '<div class="output-file delayed-output output-review" style="margin-top:10px;"><span class="output-mark">↳</span><span><small>검토 파일</small><strong>검토 결과</strong></span></div>')
     .replaceAll('<div class="ct">무엇이 달라졌나</div><div class="cb">결과물 · 검토 결과</div>', '<div class="ct">최종 아키텍처</div><div class="cb">Multi Agent · 결과물 · 검토 결과</div>')
     .replaceAll('한 명한테 다 시키면 잘 안 됩니다.', '한 Agent에 모든 업무를 맡기면 역할이 분리되지 않습니다.')
     .replaceAll('방도 없고 안내문도 없으니 매번 새로 설명해야 합니다.', '업무 공간과 실행 기준이 없으면 매번 같은 내용을 다시 입력해야 합니다.')
@@ -545,6 +575,14 @@ if (finalCriteriaSlide && finalSkillSlide && SLIDES.indexOf(finalSkillSlide) > S
   SLIDES.splice(SLIDES.indexOf(finalSkillSlide), 1);
   SLIDES.splice(SLIDES.indexOf(finalCriteriaSlide), 0, finalSkillSlide);
 }
+
+const newsExampleSlide = SLIDES.find(slide => slide.html.includes('머릿속 기준을 글로 꺼냈더니'));
+if (newsExampleSlide) {
+  const newsIndex = SLIDES.indexOf(newsExampleSlide);
+  SLIDES.splice(newsIndex + 1, 0, {notes:"뉴스 클리핑과 같은 기준 정리를 취업 준비 업무에 적용한 추가 사례입니다.",html:"<div class=\"inner\" style=\"max-width:1120px;\"><div class=\"kicker\">사례 A · 취업 준비</div><div class=\"h2\" style=\"font-size:25px;\">채용 공고 기준을 이력서에 연결했더니</div><div class=\"sub\">채용 공고의 요구 조건을 정리하고, 내 경험과 맞춰 빠진 내용을 확인합니다.</div><div class=\"demo\" style=\"margin-top:20px;padding:20px 22px;\"><div class=\"flow\"><div class=\"fnode\"><div class=\"ctag bl\">INPUT</div><div class=\"ct\">채용 공고 + 이력서</div><div class=\"cb\">지원할 직무와 내 경험</div></div><div class=\"farr\">→</div><div class=\"fnode\" style=\"border-color:rgba(167,139,250,.5);\"><div class=\"ctag pu\">RULE</div><div class=\"ct\">요구 조건 매칭</div><div class=\"cb\">JD 요구 조건 → 경험 연결 → 누락 확인</div></div><div class=\"farr\">→</div><div class=\"fnode\" style=\"border-color:rgba(110,231,183,.45);\"><div class=\"ctag gr\">OUTPUT</div><div class=\"ct\">공고 맞춤 이력서</div><div class=\"cb\">수정할 항목과 근거가 보이는 결과</div></div></div></div><div class=\"bigmsg\"><div class=\"bmlbl\">같은 원리입니다</div><div class=\"bmtxt\">내가 하던 <span class=\"hl\">매칭 기준을 파일로 적어두면</span><br/>Agent가 다음 지원에도 같은 순서로 확인합니다.</div></div></div>"});
+}
+
+if (agentVsChatSlide) agentVsChatSlide.html = "<div class=\"inner\" style=\"max-width:1140px;\"><div class=\"kicker\">개념 · AGENT VS 챗봇</div><div class=\"h2\" style=\"font-size:25px;\">AI는 이제 답변을 넘어, 업무를 직접 수행합니다</div><div class=\"split-ai\" style=\"margin-top:20px;\"><div class=\"split-ai-panel chatbot-panel\"><div class=\"split-ai-label\">챗봇</div><div class=\"split-ai-title\">질문에 답합니다</div><div class=\"split-ai-flow\">질문 → 답변 → 종료</div><div class=\"split-ai-note\">다음 작업과 결과 확인은 사람이 합니다.</div></div><div class=\"split-ai-arrow\">→</div><div class=\"split-ai-panel agent-panel\"><div class=\"split-ai-label\">AI Agent</div><div class=\"split-ai-title\">업무를 수행합니다</div><div class=\"split-ai-flow\">목표 이해 → 계획 → 실행 → 결과 확인</div><div class=\"split-ai-note\">파일과 규칙을 읽고, 결과를 점검한 뒤 필요하면 다시 처리합니다.</div></div></div><div class=\"bigmsg\"><div class=\"bmlbl\">핵심 차이</div><div class=\"bmtxt\">대화형 AI에서 <span class=\"hl\">실행형 AI</span>로 넘어갑니다.</div></div></div>";
 
 function fallback(txt, done){
   const ta = document.createElement('textarea');
