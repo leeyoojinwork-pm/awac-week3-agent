@@ -885,7 +885,7 @@ if (promptForIa && !agentSkillIa) {
   };
 }
 if (promptForIa) {
-  const pagesAfterPrompt = [skillOrderPage, skillFillPage, agentSkillIa].filter(Boolean);
+  const pagesAfterPrompt = [agentSkillIa, skillOrderPage, skillFillPage].filter(Boolean);
   pagesAfterPrompt.forEach(slide => {
     const index = SLIDES.indexOf(slide);
     if (index >= 0) SLIDES.splice(index, 1);
@@ -894,9 +894,9 @@ if (promptForIa) {
 }
 const agentBuildPages = [
   slide => slide.html.includes('AI가 쓰고, 나는 고칩니다'),
+  slide => slide.html.includes('Agent별 Skill 연결 구조'),
   slide => slide.html.includes('일하는 순서를 다섯 칸으로'),
   slide => slide.html.includes('다섯 칸은 AI가 채웁니다'),
-  slide => slide.html.includes('Agent별 Skill 연결 구조'),
   slide => slide.html.includes('한 번 돌립니다 → 결과물.md'),
   slide => slide.html.includes('Agent 하나 완성')
 ].map(predicate => SLIDES.find(predicate)).filter(Boolean);
