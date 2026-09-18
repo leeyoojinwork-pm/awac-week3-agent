@@ -646,6 +646,7 @@ const takeFlowSlide = predicate => {
   slide => slide.html.includes('채용 공고 기준을 이력서에 연결했더니'),
   slide => slide.html.includes('복습 · 0–5분'),
   slide => slide.html.includes('Agent를 만듭니다'),
+  slide => slide.html.includes('개념 · AGENT VS 챗봇'),
   slide => slide.html.includes('Agent로 만들어야 하는 기준'),
   slide => slide.html.includes('Agent는 어떻게 만드나요?'),
   slide => slide.html.includes('개념 · AGENT VS 챗봇'),
@@ -670,6 +671,9 @@ const takeFlowSlide = predicate => {
   slide => slide.html.includes('발표는 이 흐름으로 진행합니다')
 ].forEach(takeFlowSlide);
 SLIDES.splice(0, SLIDES.length, ...flowOrderedSlides, ...SLIDES.filter((slide, i) => !flowUsed.has(i)));
+for (let i = SLIDES.length - 1; i >= 0; i--) {
+  if (SLIDES[i].html.includes('복습 · 0–5분') || SLIDES[i].html.includes('Agent는 어떻게 만드나요?') || SLIDES[i].html.includes('멀티 에이전트는 어떻게 만드나요?')) SLIDES.splice(i, 1);
+}
 
 const newsExampleSlide = SLIDES.find(slide => slide.html.includes('머릿속 기준을 글로 꺼냈더니'));
 if (newsExampleSlide) {
