@@ -404,7 +404,7 @@ SLIDES.forEach(slide => {
   slide.html = slide.html.replaceAll('Single Agent · 채팅방 1개', '취업 준비 Agent · 채팅방 1개');
   slide.html = slide.html.replaceAll('<strong>세 번 모두 Y</strong>일 때만 Agent로 만듭니다.', '반복만 있으면 <span class="hl">Skill</span>, 기준이 없으면 <span class="hl">기준 먼저</span>,<br/>한 번만 하는 일이면 <span class="hl">일회성 대화</span>입니다.');
   if (slide.html.includes('파일 이름은 background.md 로 해줘.')) {
-    slide.html = slide.html.replace(/<pre class="prompt">[\s\S]*?<\/pre>/, '<pre class="prompt">00. 문제 정의 — 내가 풀려는 문제를 한 문장으로\n01. 직무와 업무 — 내 직무와 하는 일\n02. 업무 순서 — 이 업무가 진행되는 순서\n03. 판단 기준 — 내가 중요하다고 말한 기준\n04. 금지 사항 — 하면 안 된다고 말한 것\n05. 확인 지점 — 사람이 확인해야 하는 곳\n06. 결과물 형태 — 결과물이 어떤 모양이어야 하는지\n07. 개선 사항 — 고치고 싶다고 말한 것\n\n내가 말한 것만 적어. 비어 있는 항목은 비워 두고 추측하지 마.\n파일 이름은 background.md 로 해줘.</pre>');
+    slide.html = slide.html.replace(/<pre class="prompt">[\s\S]*?<\/pre>/, '<pre class="prompt">아래 대화에서 내가 직접 말한 내용만 추려서 background.md로 정리해줘.\n\n00. 문제 정의 — 내가 풀려는 문제를 한 문장으로\n01. 직무와 업무 — 내 직무와 하는 일\n02. 업무 순서 — 이 업무가 진행되는 순서\n03. 판단 기준 — 내가 중요하다고 말한 기준\n04. 금지 사항 — 하면 안 된다고 말한 것\n05. 확인 지점 — 사람이 확인해야 하는 곳\n06. 결과물 형태 — 결과물이 어떤 모양이어야 하는지\n07. 개선 사항 — 고치고 싶다고 말한 것\n08. 추가 맥락 — 앞선 대화에서 이 업무를 이해하는 데 필요한 내용\n\n앞에서 문제 정의, 업무 맥락, 진행 방식, 판단 기준 등을 이미 말한 내용이 있다면\n전체 대화를 다시 살펴보고 누락된 필요한 내용만 함께 정리해줘.\n단, 내가 말하지 않은 내용은 추측하거나 보태지 마.\n내용이 없는 항목은 비워 둬.\n\n파일 이름은 background.md로 해줘.</pre>');
   }
   if (slide.html.includes('background.md — 여덟 항목')) {
     slide.html = slide.html.replaceAll('background.md — 여덟 항목', 'background.md — Agent가 알아야 할 8가지');
