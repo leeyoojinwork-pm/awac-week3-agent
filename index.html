@@ -762,6 +762,17 @@ if (backgroundExampleSlide) backgroundExampleSlide.html = `<div class="inner" st
   </div>
   <div class="bigmsg"><div class="bmlbl">background.md의 역할</div><div class="bmtxt">AI가 업무를 처음 맡아도 <span class="hl">누구의 어떤 일인지</span><br/>무엇을 지키고 무엇을 만들어야 하는지 알게 합니다.</div></div>
 </div>`;
+if (backgroundExampleSlide) backgroundExampleSlide.html = backgroundExampleSlide.html
+  .replace('display:grid;gap:10px;', 'display:grid;grid-template-columns:1fr 1fr;gap:8px;')
+  .replaceAll('padding:12px 16px;', 'padding:9px 12px;');
+if (backgroundExampleSlide) {
+  let backgroundLineDelay = 0.18;
+  backgroundExampleSlide.html = backgroundExampleSlide.html.replaceAll('class="fline" style="padding:5px 0;"', () => {
+    const style = `class="fline" style="padding:5px 0;animation-delay:${backgroundLineDelay}s;"`;
+    backgroundLineDelay += 0.1;
+    return style;
+  });
+}
 if (finalAgentBumper) {
   finalAgentBumper.html = finalAgentBumper.html.replace('>03</div>', '>02</div>');
   if (finalSkillRange) {
