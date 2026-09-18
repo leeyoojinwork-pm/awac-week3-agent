@@ -835,6 +835,8 @@ const finalBackgroundSave = SLIDES.find(slide => slide.html.includes('background
 const finalFolderIntro = SLIDES.find(slide => slide.html.includes('Agent가 먼저 나누는 업무 폴더'));
 const finalBackgroundContent = backgroundExampleSlide || SLIDES.find(slide => slide.html.includes('background.md에는 이런 내용이 담깁니다'));
 if (finalBackgroundSave) finalBackgroundSave.html = finalBackgroundSave.html.replace('background.md로 <strong>저장합니다.</strong> 이 파일로 바로 Agent를 만듭니다.', 'background.md로 <strong>저장한 뒤, 새 채팅방에 넣습니다.</strong> 여기서 Agent를 시작합니다.');
+const finalPromptSlide = SLIDES.find(slide => slide.html.includes('AI가 쓰고, 나는 고칩니다'));
+if (finalPromptSlide) finalPromptSlide.html = finalPromptSlide.html.replace('다 써준 다음, 내가 꼭 봐야 할 줄 3개만 골라서 알려줘.', '다 써준 다음, 이 업무에 필요한 Agent를 나누고 각 Agent가 사용할 Skill을 목록으로 알려줘.');
 if (finalBackgroundSave && finalBackgroundContent) {
   const backgroundSequence = finalFolderIntro
     ? [finalBackgroundSave, finalFolderIntro, finalBackgroundContent]
