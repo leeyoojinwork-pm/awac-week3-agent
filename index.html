@@ -358,8 +358,8 @@ SLIDES[4].html = SLIDES[4].html.replaceAll('그냥 대화', '일회성 대화');
 // 회의록 예시 장표와 draft/review 중간 산출물 개념은 이번 강의에서 제외한다.
 SLIDES.splice(3, 1);
 SLIDES.forEach(slide => {
-  slide.html = slide.html.replaceAll('draft.md', '결과물').replaceAll('review.md', '검토 결과').replaceAll('초안', '결과물');
-  slide.notes = slide.notes.replaceAll('draft.md', '결과물').replaceAll('review.md', '검토 결과').replaceAll('초안', '결과물');
+  slide.html = slide.html.replaceAll('draft.md', 'CLAUDE.md').replaceAll('review.md', '검토 결과').replaceAll('초안', '결과물');
+  slide.notes = slide.notes.replaceAll('draft.md', 'CLAUDE.md').replaceAll('review.md', '검토 결과').replaceAll('초안', '결과물');
 });
 
 function fallback(txt, done){
