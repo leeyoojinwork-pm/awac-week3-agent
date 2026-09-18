@@ -754,6 +754,23 @@ const finalAgentExecution = SLIDES.find(slide => slide.html.includes('Agent는 �
 const firstNewsCase = SLIDES.find(slide => slide.html.includes('머릿속 기준을 글로 꺼냈더니'));
 const backgroundSaveSlide = SLIDES.find(slide => slide.html.includes('background.md로 저장합니다'));
 const backgroundContentSlide = SLIDES.find(slide => slide.html.includes('background.md에는 이런 내용이 담깁니다'));
+const skillChoiceBumper = {
+  notes: '모든 반복 업무를 Agent로 만들 필요는 없다는 판단 장표입니다. 다음 페이지에서 Skill만으로 충분한 경우를 보여줍니다.',
+  html: `<div class="inner divslide" style="max-width:1000px;">
+  <div style="display:flex;align-items:center;gap:26px;">
+    <div style="font-size:76px;font-weight:900;line-height:1;color:rgba(124,58,237,.35);letter-spacing:-3px;">2-1</div>
+    <div style="flex:1;">
+      <div class="kicker" style="margin-bottom:6px;">판단 · 활용 범위</div>
+      <div class="h2" style="font-size:40px;line-height:1.25;">꼭 Agent로 만들어야 하나요?</div>
+      <div style="height:3px;width:74px;background:#7C3AED;border-radius:2px;margin:16px 0 14px;"></div>
+      <div class="sub" style="font-size:16px;">반복되는 업무라도, 필요한 구조에 따라 Skill 또는 Agent를 선택합니다.</div>
+    </div>
+  </div>
+</div>`
+};
+if (finalSkillRange && !SLIDES.some(slide => slide.html.includes('>2-1</div>') && slide.html.includes('꼭 Agent로 만들어야 하나요?'))) {
+  SLIDES.splice(SLIDES.indexOf(finalSkillRange), 0, skillChoiceBumper);
+}
 const backgroundExampleSlide = SLIDES.find(slide => slide.html.includes('background.md — Agent가 알아야 할 8가지'));
 if (backgroundExampleSlide) backgroundExampleSlide.html = `<div class="inner" style="max-width:1120px;">
   <div class="kicker">준비 ① 산출물 · 사례</div>
