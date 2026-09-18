@@ -777,6 +777,29 @@ if (backgroundExampleSlide) {
     return style;
   });
 }
+const newsCaseForFolderIntro = SLIDES.find(slide => slide.html.includes('머릿속 기준을 글로 꺼냈더니'));
+if (newsCaseForFolderIntro && !SLIDES.some(slide => slide.html.includes('Agent가 먼저 나누는 업무 폴더'))) {
+  const folderIntro = {
+    notes:"background.md를 읽은 Agent가 업무를 시작하기 전에 작업 공간을 나누는 장면입니다. 배경 자료는 단순한 설명서가 아니라 폴더 구조를 결정하는 재료입니다.",
+    html:`<div class="inner divslide" style="max-width:1080px;">
+      <div class="kicker">background.md 다음 · Agent의 첫 행동</div>
+      <div class="h2" style="font-size:38px;line-height:1.2;">Agent가 먼저 나누는 업무 폴더</div>
+      <div class="sub" style="font-size:17px;">background.md를 읽고, 이번 업무에 필요한 자료와 결과물이 놓일 자리를 스스로 만듭니다.</div>
+      <div class="bigmsg" style="margin-top:28px;text-align:left;">
+        <div class="bmlbl">background.md → 작업 공간</div>
+        <div class="bmtxt" style="font-size:25px;line-height:1.55;">내 업무를 이해했으니<br/><span class="hl">어디서 읽고, 어디에 쓰고, 무엇을 확인할지</span> 나눕니다.</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 28px 1fr 28px 1fr;gap:8px;align-items:center;margin-top:22px;">
+        <div class="card bl" style="min-height:92px;text-align:center;"><div class="ctag bl">INPUT</div><div class="ct">원자료</div><div class="cb">input/뉴스-원문</div></div>
+        <div style="text-align:center;color:#A78BFA;font-size:22px;">→</div>
+        <div class="card pu" style="min-height:92px;text-align:center;"><div class="ctag pu">RULE</div><div class="ct">background.md</div><div class="cb">업무 맥락 · 기준 · 금지</div></div>
+        <div style="text-align:center;color:#A78BFA;font-size:22px;">→</div>
+        <div class="card gr" style="min-height:92px;text-align:center;"><div class="ctag gr">OUTPUT</div><div class="ct">결과물 자리</div><div class="cb">output/클리핑.md</div></div>
+      </div>
+    </div>`
+  };
+  SLIDES.splice(SLIDES.indexOf(newsCaseForFolderIntro), 0, folderIntro);
+}
 if (finalAgentBumper) {
   finalAgentBumper.html = finalAgentBumper.html.replace('>03</div>', '>02</div>');
   if (finalSkillRange) {
