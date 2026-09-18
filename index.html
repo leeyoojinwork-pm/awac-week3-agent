@@ -751,11 +751,6 @@ const finalAgentExecution = SLIDES.find(slide => slide.html.includes('Agent는 �
 const firstNewsCase = SLIDES.find(slide => slide.html.includes('머릿속 기준을 글로 꺼냈더니'));
 const backgroundSaveSlide = SLIDES.find(slide => slide.html.includes('background.md로 저장합니다'));
 const backgroundContentSlide = SLIDES.find(slide => slide.html.includes('background.md에는 이런 내용이 담깁니다'));
-for (let i = SLIDES.length - 1; i >= 0; i--) {
-  if (SLIDES[i].html.includes('일하는 순서를 다섯 칸으로') || SLIDES[i].html.includes('다섯 칸은 AI가 채웁니다')) {
-    SLIDES.splice(i, 1);
-  }
-}
 const backgroundExampleSlide = SLIDES.find(slide => slide.html.includes('background.md — Agent가 알아야 할 8가지'));
 if (backgroundExampleSlide) backgroundExampleSlide.html = `<div class="inner" style="max-width:1120px;">
   <div class="kicker">준비 ① 산출물 · 사례</div>
@@ -836,6 +831,8 @@ if (finalBackgroundSave) finalBackgroundSave.html = finalBackgroundSave.html.rep
 const finalPromptSlide = SLIDES.find(slide => slide.html.includes('AI가 쓰고, 나는 고칩니다'));
 if (finalPromptSlide) finalPromptSlide.html = finalPromptSlide.html.replace('다 써준 다음, 내가 꼭 봐야 할 줄 3개만 골라서 알려줘.', '다 써준 다음, 이 업무에 필요한 Agent를 나누고 각 Agent가 사용할 Skill을 목록으로 알려줘.');
 const promptForIa = finalPromptSlide;
+const skillOrderPage = SLIDES.find(slide => slide.html.includes('일하는 순서를 다섯 칸으로'));
+const skillFillPage = SLIDES.find(slide => slide.html.includes('다섯 칸은 AI가 채웁니다'));
 let agentSkillIa = SLIDES.find(slide => slide.html.includes('Agent별 Skill 연결 구조'));
 if (promptForIa && !agentSkillIa) {
   agentSkillIa = {
@@ -861,10 +858,19 @@ if (promptForIa && !agentSkillIa) {
   <div class="bigmsg"><div class="bmlbl">IA를 읽는 법</div><div class="bmtxt">Agent는 <span class="hl">담당자</span>이고,<br/>Skill은 그 담당자가 반복해서 쓰는 <strong>업무 방법</strong>입니다.</div></div>
 </div>`
   };
-  SLIDES.splice(SLIDES.indexOf(promptForIa) + 1, 0, agentSkillIa);
+}
+if (promptForIa) {
+  const pagesAfterPrompt = [skillOrderPage, skillFillPage, agentSkillIa].filter(Boolean);
+  pagesAfterPrompt.forEach(slide => {
+    const index = SLIDES.indexOf(slide);
+    if (index >= 0) SLIDES.splice(index, 1);
+  });
+  SLIDES.splice(SLIDES.indexOf(promptForIa) + 1, 0, ...pagesAfterPrompt);
 }
 const agentBuildPages = [
   slide => slide.html.includes('AI가 쓰고, 나는 고칩니다'),
+  slide => slide.html.includes('일하는 순서를 다섯 칸으로'),
+  slide => slide.html.includes('다섯 칸은 AI가 채웁니다'),
   slide => slide.html.includes('Agent별 Skill 연결 구조'),
   slide => slide.html.includes('한 번 돌립니다 → 결과물.md'),
   slide => slide.html.includes('Agent 하나 완성')
@@ -889,7 +895,7 @@ if (finalSkillRange && finalAgentExecution) {
   finalAgentExecution.html = finalAgentExecution.html.replaceAll('class="agbox"', 'class="agbox execution-step"');
   SLIDES.splice(SLIDES.indexOf(finalSkillRange) + 1, 0, finalAgentExecution);
 }
-if (firstNewsCase && agentBuildPages.length === 4 && finalAgentBumper) {
+if (firstNewsCase && agentBuildPages.length === 6 && finalAgentBumper) {
   const pagesToMove = [finalAgentBumper, ...agentBuildPages];
   pagesToMove.forEach(slide => SLIDES.splice(SLIDES.indexOf(slide), 1));
   const newsIndex = SLIDES.indexOf(firstNewsCase);
