@@ -66,7 +66,7 @@ body{background:#0D1117;display:flex;flex-direction:column;}
 .card.sl{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);}
 .ctag{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px;}
 .ctag.pu{color:#C4B5FD;}.ctag.bl{color:#93C5FD;}.ctag.rd{color:#FCA5A5;}.ctag.am{color:#FCD34D;}.ctag.gr{color:#6EE7B7;}.ctag.sl{color:rgba(255,255,255,.35);}
-.ct{font-size:15px;font-weight:700;color:#fff;margin-bottom:5px;line-height:1.35;}
+.ct{font-size:15px;font-weight:700;color:#fff;margin-bottom:5px;line-height:1.35;word-break:keep-all;}
 .cb{font-size:13px;color:rgba(255,255,255,.58);line-height:1.75;}
 
 /* ── BA ── */
@@ -75,7 +75,7 @@ body{background:#0D1117;display:flex;flex-direction:column;}
 .aft{background:rgba(124,58,237,.13);border:1px solid rgba(124,58,237,.32);border-radius:8px;padding:14px 16px;}
 .balbl{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:7px;}
 .balbl.b{color:#FCA5A5;}.balbl.a{color:#C4B5FD;}
-.batask{font-size:14px;font-weight:700;color:#fff;margin-bottom:6px;line-height:1.35;}
+.batask{font-size:14px;font-weight:700;color:#fff;margin-bottom:6px;line-height:1.35;word-break:keep-all;}
 .babody{font-size:12.5px;color:rgba(255,255,255,.52);line-height:1.75;}
 
 /* ── Callout ── */
@@ -114,7 +114,7 @@ body{background:#0D1117;display:flex;flex-direction:column;}
 /* ── Big message ── */
 .bigmsg{background:linear-gradient(135deg,rgba(124,58,237,.18),rgba(37,99,235,.15));border:1.5px solid rgba(124,58,237,.38);border-radius:12px;padding:22px 28px;text-align:center;margin-top:14px;}
 .bmlbl{font-size:11px;color:rgba(255,255,255,.35);letter-spacing:.07em;text-transform:uppercase;margin-bottom:8px;}
-.bmtxt{font-size:18px;font-weight:800;color:#fff;line-height:1.6;}
+.bmtxt{font-size:18px;font-weight:800;color:#fff;line-height:1.6;word-break:keep-all;}
 .bmtxt .hl{color:#A78BFA;}
 
 /* ── Time badge ── */
@@ -133,7 +133,7 @@ body{background:#0D1117;display:flex;flex-direction:column;}
 .step{align-items:flex-start}
 .grid3 .card{min-height:0}
 .table td,.tbl td{word-break:keep-all}
-@media(max-height:760px){
+@media(max-height:960px){
   .paper{padding:34px 42px}
   .h1{font-size:42px}
   .h2{font-size:30px}
@@ -313,7 +313,7 @@ body,body *{color:#111827!important;}
 .output-file small{display:block;color:rgba(255,255,255,.42);font-size:10px;letter-spacing:.06em;text-transform:uppercase;}
 .output-file strong{display:block;color:#fff;font-size:13px;margin-top:2px;}
 @media (prefers-reduced-motion:reduce){.delayed-output{opacity:1;transform:none;}.slide.active .delayed-output{animation:none;}}
-.slide{overflow:hidden!important;}
+.slide{overflow-y:auto!important;overflow-x:hidden!important;}
 .slide>.inner{overflow:visible;}
 .ba{grid-template-columns:1fr 1fr;}
 .flow{justify-content:center;}
