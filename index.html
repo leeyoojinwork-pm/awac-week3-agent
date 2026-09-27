@@ -482,14 +482,14 @@ html,body{font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Goth
 body .slide,body .slide *,body .topbar,body .topbar *{color:#111827!important;}
 .slide .skill-step::after{color:#111827!important;}
 .slide .farr,.slide .parr,.slide .qa-line-v::after{color:#111827!important;}
+/* AWAC 공통 강의 프레임 */
+body{background:#f7f8f5!important}.topbar{height:82px!important;background:#f7f8f5!important;border-bottom:1px solid #d9ddd5!important;padding:0 30px!important;gap:20px}.awac-brand-area{display:flex;align-items:center;gap:22px}.awac-brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:#161916!important;font-size:18px;font-weight:650}.awac-brand *{color:inherit!important}body .topbar .awac-mark{display:grid;place-items:center;width:39px;height:39px;background:#161916;color:#d5fa42!important;font-size:27px;font-weight:800;line-height:.76}.awac-brand small{display:block;margin-top:5px;color:#646b64!important;font-size:10px;font-weight:500}.awac-week-links{display:flex;align-items:center;gap:6px}.awac-week-links a{display:grid;place-items:center;min-width:34px;height:30px;padding:0 8px;border:1px solid #d9ddd5;color:#161916!important;font-size:11px;font-weight:800;text-decoration:none}.awac-week-links a:hover,.awac-week-links a:focus-visible{background:#161916;color:#d5fa42!important}.awac-week-links a[aria-current=page]{background:#d5fa42;border-color:#161916}.topbar .tb-badge,.topbar .tb-title,.topbar .tb-meta{display:none}.topbar .tb-right{margin-left:auto}.topbar .dots{display:none}.topbar .counter,.topbar .tb-btn{color:#646b64!important;border-color:#d9ddd5!important}.progress{height:3px!important;background:#e8ebe4!important}.pfill{background:#161916!important}.stage{margin-left:76px;margin-bottom:64px;background:#f7f8f5}.slide{padding:26px 64px!important}.arr{background:#f7f8f5!important;border-color:#d9ddd5!important;color:#161916!important;border-radius:4px!important}.arr.p{left:93px}.arr.n{right:22px}.awac-rail{position:fixed;top:82px;bottom:64px;left:0;width:76px;border-right:1px solid #d9ddd5;background:#f7f8f5;display:flex;align-items:center;flex-direction:column;padding:20px 0;z-index:12}.awac-rail nav{display:flex;flex-direction:column;gap:10px;margin-top:20px;overflow:hidden}.awac-rail button{width:44px;height:40px;border:0;border-radius:4px;background:transparent;color:#646b64;font:13px inherit;cursor:pointer}.awac-rail button.active{background:#161916;color:#d5fa42}.awac-rail-label{margin-top:auto;writing-mode:vertical-rl;font-size:10px;color:#646b64}.awac-footer{position:fixed;bottom:0;left:76px;right:0;height:64px;z-index:12;display:flex;align-items:center;justify-content:space-between;padding:0 28px;border-top:1px solid #d9ddd5;background:#f7f8f5;color:#646b64;font-size:10px;line-height:1.45}.awac-footer b{color:#161916;font-size:12px}.notes{bottom:64px!important}.notes,.notes *{color:#f7f8f5!important}@media(max-width:600px){.topbar{padding:0 14px!important}.awac-brand-area{gap:9px}.awac-brand{gap:6px}.awac-brand small{display:none}.awac-week-links{gap:3px}.awac-week-links a{min-width:26px;height:25px;padding:0 5px;font-size:10px}.awac-rail{width:54px}.awac-rail button{width:36px}.stage{margin-left:54px}.awac-footer{left:54px;padding:0 12px}.awac-footer span:last-child{display:none}.arr.p{left:66px}.arr.n{right:8px}}
 </style>
 </head>
 <body>
 
 <div class="topbar">
-  <span class="tb-badge">입문 60분</span>
-  <span class="tb-title">Single → Multi Agent</span>
-  <span class="tb-meta">· 60분 · 이유진</span>
+  <div class="awac-brand-area"><a class="awac-brand" href="https://leeyoojinwork-pm.github.io/awac-cohort1-platform/" aria-label="AWAC 1기 강의 플랫폼"><span class="awac-mark">AW<br>AC</span><span><b>AWAC</b><small>AFTER WORK AI CLUB</small></span></a><nav class="awac-week-links" aria-label="주차별 강의 바로가기"><a href="https://leeyoojinwork-pm.github.io/awac-week1-agent/">1W</a><a href="https://leeyoojinwork-pm.github.io/awac-week2-agent/">2W</a><a href="https://leeyoojinwork-pm.github.io/awac-week3-agent/" aria-current="page">3W</a><a href="https://leeyoojinwork-pm.github.io/awac-week4-agent/">4W</a></nav></div>
   <div class="tb-right">
     <div class="dots" id="dots"></div>
     <span class="counter"><span id="cur">1</span> / <span id="tot">0</span></span>
@@ -498,6 +498,7 @@ body .slide,body .slide *,body .topbar,body .topbar *{color:#111827!important;}
 </div>
 <div class="progress"><div class="pfill" id="pf"></div></div>
 
+<aside class="awac-rail" aria-label="강의 목차"><nav id="awac-rail-nav"></nav><span class="awac-rail-label">AWAC / 03</span></aside>
 <div class="stage" id="stage"></div>
 <button class="arr p" id="btnP" onclick="go(-1)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 3l-5 5 5 5"/></svg></button>
 <button class="arr n" id="btnN" onclick="go(1)"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3l5 5-5 5"/></svg></button>
@@ -506,6 +507,7 @@ body .slide,body .slide *,body .topbar,body .topbar *{color:#111827!important;}
   <div class="nlbl">발표 노트</div>
   <div id="notesText"></div>
 </div>
+<footer class="awac-footer"><b>AWAC 1기 강의 플랫폼</b><span>© 2026 육민호, 이유진. All rights reserved.</span></footer>
 
 <script>
 const SLIDES = [
@@ -835,6 +837,7 @@ function fallback(txt, done){
 }
 const stage = document.getElementById('stage');
 const dotsEl = document.getElementById('dots');
+const awacRailNav = document.getElementById('awac-rail-nav');
 let cur = 0, notesOpen = false, tx = 0;
 
 // 최종 흐름 보정: 준비 → Agent → Skill/실행 → Multi Agent 순서를 화면 생성 직전에 고정합니다.
@@ -1195,6 +1198,12 @@ SLIDES.forEach((s, i) => {
   dot.className = 'dot' + (i === 0 ? ' on' : '');
   dot.onclick = () => show(i);
   dotsEl.appendChild(dot);
+  const railButton = document.createElement('button');
+  railButton.className = 'awac-rail-button' + (i === 0 ? ' active' : '');
+  railButton.textContent = String(i + 1).padStart(2, '0');
+  railButton.title = '슬라이드 ' + String(i + 1);
+  railButton.onclick = () => show(i);
+  awacRailNav.appendChild(railButton);
 });
 
 function fitSlides(){
@@ -1227,6 +1236,7 @@ function show(idx){
   document.getElementById('btnP').disabled = cur === 0;
   document.getElementById('btnN').disabled = cur === SLIDES.length - 1;
   document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('on', i === cur));
+  document.querySelectorAll('.awac-rail-button').forEach((button, i) => button.classList.toggle('active', i === cur));
   next.querySelectorAll('.demo, .demo *').forEach(el => { const a = el.style.animation; el.style.animation='none'; void el.offsetWidth; el.style.animation=a || ''; });
 }
 function go(d){ show(cur + d); }
