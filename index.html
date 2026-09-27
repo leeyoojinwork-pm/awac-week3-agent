@@ -1244,17 +1244,28 @@ document.addEventListener('keydown', e => {
 stage.addEventListener('touchstart', e => tx = e.touches[0].clientX);
 stage.addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1); });
 show(0);
-/* 인라인 다크 배경 강제 제거 — .demo, .inner 내부만 */
-document.querySelectorAll('.demo [style], .inner [style]').forEach(el => {
-  const s = el.getAttribute('style');
-  if (s && s.includes('background:rgba(0,0,0')) {
-    el.style.background = '#f8f6fb';
-    el.style.border = '1px solid #e2e8f0';
+/* 인라인 다크 스타일 강제 제거 — 슬라이드 전체 */
+document.querySelectorAll('.slide [style]').forEach(el => {
+  const s = el.getAttribute('style') || '';
+  /* 다크 배경 → 라이트 */
+  if (/background\s*:\s*rgba\(\s*0\s*,\s*0\s*,\s*0/.test(s)) {
+    el.style.background = '#f3f0f7';
+    if (!el.style.border || el.style.border.includes('rgba')) el.style.border = '1px solid #e2dce8';
   }
-  if (s && /color:\s*rgba\(255,255,255/.test(s)) el.style.color = '#334155';
-  if (s && s.includes('color:#fff')) el.style.color = '#111827';
-  if (s && s.includes('color:#C4B5FD')) el.style.color = '#6d28d9';
-  if (s && s.includes('color:#6EE7B7')) el.style.color = '#047857';
+  /* 흰색/밝은 보라/밝은 초록 텍스트 → 다크 */
+  if (/color\s*:\s*#fff\b/.test(s) && !el.classList.contains('sn') && !el.closest('.sn') && !el.closest('.tb-badge')) el.style.color = '#111827';
+  if (/color\s*:\s*rgba\(\s*255\s*,\s*255\s*,\s*255/.test(s)) {
+    const m = s.match(/rgba\(\s*255\s*,\s*255\s*,\s*255\s*,\s*([\d.]+)/);
+    if (m && parseFloat(m[1]) < 0.65) el.style.color = '#64748b';
+    else if (m) el.style.color = '#334155';
+  }
+  if (s.includes('color:#C4B5FD') || s.includes('color: #C4B5FD')) el.style.color = '#6d28d9';
+  if (s.includes('color:#6EE7B7') || s.includes('color: #6EE7B7')) el.style.color = '#047857';
+  if (s.includes('color:#A78BFA') || s.includes('color: #A78BFA')) el.style.color = '#7c3aed';
+  if (/color\s*:\s*rgba\(\s*252\s*,\s*211\s*,\s*77/.test(s)) el.style.color = '#a16207';
+  if (/color\s*:\s*rgba\(\s*110\s*,\s*231\s*,\s*183/.test(s)) el.style.color = '#047857';
+  /* 다크 보더 → 라이트 */
+  if (/border.*rgba\(\s*255\s*,\s*255\s*,\s*255/.test(s)) el.style.borderColor = '#d7dee8';
 });
 </script>
 </body>
