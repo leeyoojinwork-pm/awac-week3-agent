@@ -467,7 +467,11 @@ html,body{font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Goth
 /* 화이트 테마 최종 우선순위 보정 — 레거시 다크 스타일 덮어쓰기 */
 .demo,.demo.card-pop{background:#fff!important;border:1px solid #d7dee8!important;color:#111827!important;box-shadow:none!important;}
 .demo .dlbl{color:#111827!important;}.demo .fline,.demo .fline span{color:#334155!important;}.demo .fline.fn{color:#047857!important;}
-.demo>div[style*="background:rgba(0,0,0"]{background:#fff!important;border:1px solid #e2e8f0!important;}
+.demo>div[style*="background:rgba(0,0,0"]{background:#f8f6fb!important;border:1px solid #e2e8f0!important;}
+[style*="background:rgba(0,0,0"]{background:#f8f6fb!important;border:1px solid #e2e8f0!important;border-radius:9px;}
+[style*="color:rgba(255,255,255,.5"]{color:#64748b!important;}
+[style*="color:#C4B5FD"]{color:#6d28d9!important;}
+[style*="color:#6EE7B7"]{color:#047857!important;}
 .demo .bubble{background:#f1edff!important;border-color:#c4b5fd!important;color:#111827!important;}
 .pstep{background:#fff!important;border:1px solid #c4b5fd!important;}.pstep.hot{background:#f1edff!important;border-color:#a78bfa!important;}
 .pn,.pcap{color:#64748b!important;}.parr{color:#7c3aed!important;}.pt{color:#111827!important;}.pf{color:#047857!important;}.pstep.hot .pn,.pstep.hot .pcap{color:#6d28d9!important;}
@@ -1243,6 +1247,21 @@ document.addEventListener('keydown', e => {
 stage.addEventListener('touchstart', e => tx = e.touches[0].clientX);
 stage.addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1); });
 show(0);
+/* 인라인 다크 배경 강제 제거 */
+document.querySelectorAll('[style]').forEach(el => {
+  const s = el.getAttribute('style');
+  if (s && s.includes('background:rgba(0,0,0')) {
+    el.style.background = '#f8f6fb';
+    el.style.border = '1px solid #e2e8f0';
+  }
+  if (s && /color:\s*rgba\(255,255,255/.test(s)) {
+    const c = el.style.color;
+    if (c && c !== '#fff' && c !== 'white') el.style.color = '#334155';
+  }
+  if (s && s.includes('color:#fff')) el.style.color = '#111827';
+  if (s && s.includes('color:#C4B5FD')) el.style.color = '#6d28d9';
+  if (s && s.includes('color:#6EE7B7')) el.style.color = '#047857';
+});
 </script>
 </body>
 </html>
